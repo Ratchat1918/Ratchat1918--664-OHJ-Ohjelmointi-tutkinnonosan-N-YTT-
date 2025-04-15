@@ -9,8 +9,50 @@
     {
         "tuoteNimi":"Esimerki2",
         "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
-        "tuoteKuvaus":"Täma polkupyörä on toinen tuoden esmerkki",
+        "tuoteKuvaus":"Täma polkupyörä on tuoden esmerkki",
         "tuoteHinta":499,
+        "onkoOstoskorissa":false
+    },
+    {
+        "tuoteNimi":"Esimerki3",
+        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteKuvaus":"Täma polkupyörä on tuoden esmerkki",
+        "tuoteHinta":599,
+        "onkoOstoskorissa":false
+    },
+    {
+        "tuoteNimi":"Esimerki4",
+        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteKuvaus":"Täma polkupyörä on tuoden esmerkki",
+        "tuoteHinta":299,
+        "onkoOstoskorissa":false
+    },
+    {
+        "tuoteNimi":"Esimerki4",
+        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteKuvaus":"Täma polkupyörä on tuoden esmerkki",
+        "tuoteHinta":199,
+        "onkoOstoskorissa":false
+    },
+    {
+        "tuoteNimi":"Esimerki5",
+        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteKuvaus":"Täma polkupyörä on tuoden esmerkki",
+        "tuoteHinta":1999,
+        "onkoOstoskorissa":false
+    },
+    {
+        "tuoteNimi":"Esimerki6",
+        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteKuvaus":"Täma polkupyörä on tuoden esmerkki",
+        "tuoteHinta":999,
+        "onkoOstoskorissa":false
+    },
+    {
+        "tuoteNimi":"Esimerki7",
+        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteKuvaus":"Täma polkupyörä on tuoden esmerkki",
+        "tuoteHinta":899,
         "onkoOstoskorissa":false
     }
 ]
