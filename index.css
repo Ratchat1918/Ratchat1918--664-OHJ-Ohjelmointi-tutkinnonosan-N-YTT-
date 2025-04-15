@@ -60,7 +60,7 @@ nav button {
     right: -290px;
     width: 250px;
     height: 100%;
-    background-color: aquamarine;
+    background-color: rgb(255, 0, 0);
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
     padding: 20px;
     transition: right 0.7s ease-in-out;
@@ -114,7 +114,7 @@ nav button {
 
 .modal-content {
     position: relative;
-    background-color: white;
+    background-color: rgb(255, 0, 0);
     padding: 20px;
     width: 350px;
     border-radius: 8px;
