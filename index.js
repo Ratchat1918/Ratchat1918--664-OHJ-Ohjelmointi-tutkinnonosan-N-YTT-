@@ -39,7 +39,6 @@ function registerUser() {
     }
 };
 
-<<<<<<< HEAD
 function saveUser(username, password) {
     let user = {name: username, password: password};
     localStorage.setItem("userData", JSON.stringify(user));
@@ -60,11 +59,6 @@ function loginUser() {
         }
     }
 };
-=======
-function myydaTuote(){
-    window.open('myyjanSivu.html');
-}
->>>>>>> 37724c3b81be46dff7b4a04556d020db13e29949
 
 function valitaTuote(tavaraIndex) {
     //document.getElementById("tuodenSivuTitle").textContent=`sdfsdg`;
