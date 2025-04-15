@@ -8,4 +8,6 @@ Sivussa täytyy olla seuravat sivut:
 
 - Ostoskori sivu josta löydetään kaikki lisätetty tavaroita
 
-* Kirjautaminen sivu jossa käyttäjä saa luoda tili ja sen jälkeen julkaista oma myytävä tavara eli lisätä sen kuvaus, tavaran kuvat ja hinta.
+* Kirjautaminen sivu jossa käyttäjä saa luoda tili
+
+- Myyjan sivu josta kirjauttu sisän käyttäjä saa julkaista oma oma myytävä tavara eli lisätä sen kuvaus, tavaran kuvat ja hinta
