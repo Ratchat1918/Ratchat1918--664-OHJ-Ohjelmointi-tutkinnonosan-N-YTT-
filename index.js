@@ -1,24 +1,20 @@
-function valitaTuote() {
-    location.replace("imoitus.html");
-}
-
-const kauppaContainer = document.getElementById("kauppaContainer");
-
-function luodaTavaraLista() {
-    fetch('./tavaraLista.json')
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(element => {
-                kauppaContainer.innerHTML += `
-                    <div onclick="valitaTuote()" class="card">
-                        <img id="tuoteKuva" src="${element.kuvaUrl}" />
-                        <h2>${element.tuoteNimi}</h2>
-                        <p>${element.tuoteKuvaus}</p>
-                        <h2>${element.tuoteHinta}</h2>
-                    </div>
-                `;
-            });
-        });
-}
-
-luodaTavaraLista();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet">
+    <title>Kauppa</title>
+</head>
+<body>
+    <div id="navbarContainer">
+        <nav>
+            <a id="tunnus" href="#"><img src="kuvat/duck.png"></a>
+            <a href="login.html">Kirjatua sisään</a></li>
+            <a href="myyjanSivu.html">Myydä</a></li>
+        </nav>
+    </div>
+    <div id="kauppaContainer"></div>
+</body>
+<script src="index.js"></script>
+</html>
