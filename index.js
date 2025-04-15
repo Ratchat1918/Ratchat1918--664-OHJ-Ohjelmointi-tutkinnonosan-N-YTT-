@@ -33,25 +33,29 @@ function checkPasswordUsername() {
     }
 };
 
-function valitaTuote() {
-    location.replace("imoitus.html");
+function valitaTuote(tavaraIndex) {
+    //document.getElementById("tuodenSivuTitle").textContent=`sdfsdg`;
+    console.log(tavaraIndex);
+    window.open('imoitus.html');
 }
 
 const kauppaContainer = document.getElementById("kauppaContainer");
 
 function luodaTavaraLista() {
+    let x=0;//Tavaran index
     fetch('./tavaraLista.json')
         .then(res => res.json())
         .then(data => {
             data.forEach(element => {
                 kauppaContainer.innerHTML += `
-                    <div onclick="valitaTuote()" class="card">
+                    <div onclick="valitaTuote(${x})" class="card">
                         <img id="tuoteKuva" src="${element.kuvaUrl}" />
                         <h2>${element.tuoteNimi}</h2>
                         <p>${element.tuoteKuvaus}</p>
                         <h2>${element.tuoteHinta} €</h2>
                     </div>
                 `;
+                x++
             });
         });
 }
