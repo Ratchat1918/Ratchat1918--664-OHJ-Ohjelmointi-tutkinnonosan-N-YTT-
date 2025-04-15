@@ -7,7 +7,45 @@
     <title>Kauppa</title>
 </head>
 <body>
-    <div id="navbarContainer"></div>
+    <div id="navbarContainer">
+        <nav>
+            <a id="tunnus" href="#"><img src="kuvat/duck.png"></a>
+            <button id="loginBtn">Kirjaudu</button>
+            <a href="myyjanSivu.html">Myydä</a></li>
+        </nav>
+    </div>
+    <div id="loginPanel" class="panel">
+        <span id="closeBtn">&times;</span>
+        <h2>Kirjaudu sisään</h2>
+        <form id="formPanel">
+            <label for="username">Käyttäjätunnus:</label>
+            <input type="text" id="username" name="username">
+            <label for="password">Salasana:</label>
+            <input type="text" id="password" name="password">
+            <button type="submit">Kirjaudu sisään</button>
+        </form>
+
+        <h2>Uusi käyttäjä?</h2>
+        <button id="openModal">Rekisteröidy</button>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Uusi käyttäjä</h2>
+            <form id="registerModal">
+                <div>
+                    <label for="newUsername">Käyttäjätunnus:</label>
+                    <input type="text" id="newUsername" name="newUsername">
+                </div>
+                <div>
+                    <label for="newPassword">Salasana:</label>
+                    <input type="text" id="newPassword" name="newPassword">
+                </div>
+                <button type="submit" id="registerBtn">Rekisteröidy</button>
+            </form>
+        </div>
+    </div>
+    <div id="kauppaContainer"></div>
 </body>
 <script src="index.js"></script>
 </html>
