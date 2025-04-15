@@ -1,0 +1,16 @@
+[
+    {
+        "tuoteNimi":"Esimerki1",
+        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteKuvaus":"Täma polkupyörä on tuoden esmerkki",
+        "tuoteHinta":399,
+        "onkoOstoskorissa":false
+    },
+    {
+        "tuoteNimi":"Esimerki2",
+        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteKuvaus":"Täma polkupyörä on toinen tuoden esmerkki",
+        "tuoteHinta":499,
+        "onkoOstoskorissa":false
+    }
+]
