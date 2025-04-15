@@ -2,7 +2,7 @@
 
 Sivussa täytyy olla seuravat sivut:
 
-- Pää sivu josta löytämme tavaroidem lista
+- Pää sivu josta löytämme tavaroiden lista
 
 * Tavaran sivu josta löydetään tavaran kuvaus, kuva, hinta ja nappi anatava lisätä sen ostoskoriin
 
