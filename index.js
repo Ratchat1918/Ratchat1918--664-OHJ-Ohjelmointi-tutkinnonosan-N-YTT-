@@ -33,6 +33,10 @@ function checkPasswordUsername() {
     }
 };
 
+function myydaTuote(){
+    window.open('myyjanSivu.html');
+}
+
 function valitaTuote(tavaraIndex) {
     //document.getElementById("tuodenSivuTitle").textContent=`sdfsdg`;
     console.log(tavaraIndex);
