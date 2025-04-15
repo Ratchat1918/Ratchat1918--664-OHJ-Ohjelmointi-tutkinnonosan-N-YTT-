@@ -27,3 +27,7 @@ Projektin aluksi meillä oli suunnittelupalaveri, jossa sovimme mitä teemme, aj
 Viestimme toisillemma aktiivisesti Discord kanavan kautta jolloin molemmat tietävät mitä kumpikin tekee milloinkin.
 
 Projektin arvioitu valmistuminen on 30.4.2025. 
+
+
+## Ajanseuranta
+Egor: 15/04/225 4.5 tuntia
