@@ -10,7 +10,8 @@
     <div id="navbarContainer">
         <nav>
             <a id="tunnus" href="#"><img src="kuvat/duck.png"></a>
-            <button id="loginBtn">Kirjaudu</button>
+            <p id="loggedUser"></p>
+            <button id="logBtn">Kirjaudu</button>
             <a href="myyjanSivu.html">Myydä</a></li>
         </nav>
     </div>
@@ -21,8 +22,9 @@
             <label for="username">Käyttäjätunnus:</label>
             <input type="text" id="username" name="username">
             <label for="password">Salasana:</label>
-            <input type="text" id="password" name="password">
-            <button type="submit">Kirjaudu sisään</button>
+            <input type="password" id="password" name="password">
+            <button type="submit" id="loginBtn">Kirjaudu sisään</button>
+            <p id="inCorrect" style="color: blue;"></p>
         </form>
 
         <h2>Uusi käyttäjä?</h2>
@@ -39,7 +41,7 @@
                 </div>
                 <div>
                     <label for="newPassword">Salasana:</label>
-                    <input type="text" id="newPassword" name="newPassword">
+                    <input type="password" id="newPassword" name="newPassword">
                 </div>
                 <button type="submit" id="registerBtn">Rekisteröidy</button>
             </form>

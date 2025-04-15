@@ -21,7 +21,7 @@ document.getElementById("registerBtn").addEventListener("click", function() {
 document.getElementById("loginBtn").addEventListener("click", function() {
     event.preventDefault();
     loginUser();
-})
+});
 
 function registerUser() {
     let syötettyKäyttäjänimi = document.getElementById("newUsername").value;
