@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="index.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="kuvat/duck.png">
     <title>Kauppa</title>
 </head>
 <body>
     <div id="navbarContainer">
         <a id="tunnus" href="#"><img src="kuvat/duck.png"></a>
         <nav>
+            <p id="loggedUser"></p>
             <a id="tunnus" href="#"><img src="kuvat/duck.png"></a>
             <button id="logBtn">Kirjaudu</button>
-            <a href="myyjanSivu.html">Myydä</a></li>
+            <button onclick="myydaTuote()" id="myydaBtn">Myy</button>
         </nav>
     </div>
     <div id="loginPanel" class="panel">
@@ -43,6 +45,7 @@
                     <label for="newPassword">Salasana:</label>
                     <input type="password" id="newPassword" name="newPassword">
                 </div>
+                <p id="inValidRegister" style="color: blue;"></p>
                 <button type="submit" id="registerBtn">Rekisteröidy</button>
             </form>
         </div>
