@@ -1,66 +1,34 @@
 [
     {
-        "tuoteNumero":0,
+        "tuoteIndex":0,
         "tuoteNimi":"Esimerki1",
-        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
         "tuoteHinta":399,
         "onkoOstoskorissa":false
     },
     {
-        "tuoteNumero":1,
-        "tuoteNimi":"Esimerki2",
-        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteIndex":0,
+        "tuoteNimi":"Esimerki1",
+        "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
-        "tuoteHinta":499,
+        "tuoteHinta":399,
         "onkoOstoskorissa":false
     },
     {
-        "tuoteNumero":2,
-        "tuoteNimi":"Esimerki3",
-        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteIndex":0,
+        "tuoteNimi":"Esimerki1",
+        "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
-        "tuoteHinta":599,
+        "tuoteHinta":399,
         "onkoOstoskorissa":false
     },
     {
-        "tuoteNumero":3,
-        "tuoteNimi":"Esimerki4",
-        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
+        "tuoteIndex":0,
+        "tuoteNimi":"Esimerki1",
+        "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
-        "tuoteHinta":299,
-        "onkoOstoskorissa":false
-    },
-    {
-        "tuoteNumero":4,
-        "tuoteNimi":"Esimerki5",
-        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
-        "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
-        "tuoteHinta":199,
-        "onkoOstoskorissa":false
-    },
-    {
-        "tuoteNumero":5,
-        "tuoteNimi":"Esimerki6",
-        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
-        "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
-        "tuoteHinta":1999,
-        "onkoOstoskorissa":false
-    },
-    {
-        "tuoteNumero":6,
-        "tuoteNimi":"Esimerki7",
-        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
-        "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
-        "tuoteHinta":999,
-        "onkoOstoskorissa":false
-    },
-    {
-        "tuoteNumero":7,
-        "tuoteNimi":"Esimerki8",
-        "kuvaUrl":"kuvat/tuoteEsimerki.jpg",
-        "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
-        "tuoteHinta":899,
+        "tuoteHinta":399,
         "onkoOstoskorissa":false
     }
 ]
