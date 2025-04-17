@@ -12,6 +12,34 @@ body {
     border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
 }
+a{
+    text-decoration: none;
+    color: white;
+}
+.card{
+    border: 1px solid rgb(80, 80, 80);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+    display: inline-block;
+    justify-content: center;
+    cursor: pointer;
+}
+#kauppaContainer{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+#tunnus{
+    text-align: left;
+}
+#tuoteKuva{
+    max-width: 100%;
+}
 
 nav {
     padding: 10px;
@@ -58,6 +86,7 @@ nav button {
 
 #confirmationModal {
     position: fixed;
+    display: none;
     top: 74px;
     left: 50%;
     transform: translateX(-50%);
@@ -83,7 +112,7 @@ nav button {
     cursor: pointer;
 }
 
-#productName, #productDescription, #productPrice, #productPicture {
+#productName, #productDetail, #productDescription, #productPrice, #productPicture {
     /*border: 1px solid #000000;*/
     margin: 10px 0;
 }
