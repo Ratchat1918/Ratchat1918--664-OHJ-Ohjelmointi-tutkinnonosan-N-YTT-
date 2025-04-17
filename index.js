@@ -127,7 +127,7 @@ function luodaTavaraLista() {
         });
 }
 
-luodaTavaraLista();
+//luodaTavaraLista();
 
 function myydaTuote() {
     window.open("myyjanSivu.html");
