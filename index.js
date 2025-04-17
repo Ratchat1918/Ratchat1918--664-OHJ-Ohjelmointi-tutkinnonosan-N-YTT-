@@ -102,7 +102,7 @@ window.onload = function() {     /**TARKASTAA ONKO KÄYTTÄJÄ KIRJAUTUNUT */
 
 function valitaTuote(tavaraIndex) {
     //document.getElementById("tuodenSivuTitle").textContent=`sdfsdg`;
-    console.log(tavaraIndex);
+    sessionStorage.setItem("tuoteIndex",tavaraIndex);
     window.open('imoitus.html');
 }
 
