@@ -1,12 +1,13 @@
-let tuoteIndex=0;
+let tuoteIndexLoacal=sessionStorage.getItem("tuoteIndex");
+tuoteIndexLoacal=Number(tuoteIndexLoacal);
 let urlLsit=[];
-let imgNum=0
+let imgNum=0;
 function createSlideShow(){
     fetch('./tavaraLista.json')
         .then(res => res.json())
         .then(data => {
             data.forEach(element => {
-                if(element.tuoteIndex===0){
+                if(element.tuoteIndex===tuoteIndexLoacal){
                     element.kuvaUrl.forEach(imgUrl=>{
                         urlLsit.push(imgUrl);
                     })
@@ -21,7 +22,7 @@ function createTuoteInfo(){
         .then(res => res.json())
         .then(data => {
             data.forEach(element => {
-                if(element.tuoteIndex===0){
+                if(element.tuoteIndex===tuoteIndexLoacal){
                     document.getElementById("tuoteNimi").textContent=`${element.tuoteNimi}`;
                     document.getElementById("tuoteInfo").innerHTML+=`<p>${element.tuoteKuvausPitka}</p>`;
                 }
@@ -29,6 +30,10 @@ function createTuoteInfo(){
         });
 };
 createTuoteInfo();
+
+function addToCart(){
+    
+}
 
 function nextImg(){
     if(imgNum<urlLsit.length-1){
