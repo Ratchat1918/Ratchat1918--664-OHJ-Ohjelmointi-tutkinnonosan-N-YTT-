@@ -34,3 +34,4 @@ Egor: 15/04/225 4.5 tuntia
 Henry: 15/04/25 5 tuntia
 
 Henry 16/04/25 2h 15 min
+Henry 17/4/25  6h 30min
