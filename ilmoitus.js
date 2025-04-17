@@ -16,18 +16,19 @@ function createSlideShow(){
         });
 };
 createSlideShow();
-function createDescription(){
+function createTuoteInfo(){
     fetch('./tavaraLista.json')
         .then(res => res.json())
         .then(data => {
             data.forEach(element => {
                 if(element.tuoteIndex===0){
-                    
+                    document.getElementById("tuoteNimi").textContent=`${element.tuoteNimi}`;
+                    document.getElementById("tuoteInfo").innerHTML+=`<p>${element.tuoteKuvausPitka}</p>`;
                 }
             });
         });
 };
-createSlideShow();
+createTuoteInfo();
 
 function nextImg(){
     if(imgNum<urlLsit.length-1){
