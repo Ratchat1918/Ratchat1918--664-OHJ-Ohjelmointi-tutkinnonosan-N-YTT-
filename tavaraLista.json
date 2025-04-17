@@ -1,31 +1,31 @@
 [
     {
         "tuoteIndex":0,
-        "tuoteNimi":"Esimerki1",
+        "tuoteNimi":"Esimerki",
         "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
         "tuoteHinta":399,
         "onkoOstoskorissa":false
     },
     {
-        "tuoteIndex":0,
-        "tuoteNimi":"Esimerki1",
+        "tuoteIndex":1,
+        "tuoteNimi":"Esimerki",
         "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
         "tuoteHinta":399,
         "onkoOstoskorissa":false
     },
     {
-        "tuoteIndex":0,
-        "tuoteNimi":"Esimerki1",
+        "tuoteIndex":2,
+        "tuoteNimi":"Esimerki",
         "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
         "tuoteHinta":399,
         "onkoOstoskorissa":false
     },
     {
-        "tuoteIndex":0,
-        "tuoteNimi":"Esimerki1",
+        "tuoteIndex":3,
+        "tuoteNimi":"Esimerki",
         "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
         "tuoteHinta":399,
