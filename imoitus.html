@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="ilmoitus.css" rel="stylesheet">
-    <title>Kauppa</title>
+    <link rel="icon" type="image/png" href="kuvat/duck.png">    
+    <title>Ilmoitus</title>
 </head>
 <body>
-    <div id="navbarContainer"></div>
-</body>
-<script src="ilmoitus.js"></script>
-</html>
+    <div id="navbarContainer">
+        <a id="tunnus" href="index.html"><img src="kuvat/duck.png"></a>
+        <nav>
+            <p id="loggedUser"></p>
+            <button id="logBtn">Kirjaudu</button>
+            <button onclick="myydaTuote()" id="myydaBtn">Myy</button>
+        </nav>
+    </div>
+    <div id="slideshowContainer"></div>
+    <div id="tuoteInfo"></div>
+    <div id="imgChamngeContainer" >
+        <button onclick="previousImg()">previous</button>
+        <button onclick="nextImg()">next</button>
+    </div>
+<script src="ilmoitus.js"   ></script>
+</html> 
