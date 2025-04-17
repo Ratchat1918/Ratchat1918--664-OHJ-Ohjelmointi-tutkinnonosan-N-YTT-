@@ -1,33 +1,37 @@
 [
     {
         "tuoteIndex":0,
-        "tuoteNimi":"Esimerki",
+        "tuoteNimi":"Esimerkki",
         "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
-        "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
+        "tuoteKuvausLyhyt":"This is an example of a product",
+        "tuoteKuvausPitka":"This plushie crawled out of hell so that YOU, yes you could buy it",
         "tuoteHinta":399,
         "onkoOstoskorissa":false
     },
     {
         "tuoteIndex":1,
-        "tuoteNimi":"Esimerki",
+        "tuoteNimi":"Esimerkki",
         "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
-        "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
+        "tuoteKuvausLyhyt":"This is an example of a product",
+        "tuoteKuvausPitka":"This plushie crawled out of hell so that YOU, yes you could buy it",
         "tuoteHinta":399,
         "onkoOstoskorissa":false
     },
     {
         "tuoteIndex":2,
-        "tuoteNimi":"Esimerki",
+        "tuoteNimi":"Esimerkki",
         "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
-        "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
+        "tuoteKuvausLyhyt":"This is an example of a product",
+        "tuoteKuvausPitka":"This plushie crawled out of hell so that YOU, yes you could buy it",
         "tuoteHinta":399,
         "onkoOstoskorissa":false
     },
     {
         "tuoteIndex":3,
-        "tuoteNimi":"Esimerki",
+        "tuoteNimi":"Esimerkki",
         "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
-        "tuoteKuvaus":"Täma polkupyörä on tuoden esimerkki",
+        "tuoteKuvausLyhyt":"This is an example of a product",
+        "tuoteKuvausPitka":"This plushie crawled out of hell so that YOU, yes you could buy it",
         "tuoteHinta":399,
         "onkoOstoskorissa":false
     }
