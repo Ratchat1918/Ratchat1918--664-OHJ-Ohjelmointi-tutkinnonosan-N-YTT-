@@ -31,6 +31,7 @@ Projektin arvioitu valmistuminen on 30.4.2025.
 
 ## Ajanseuranta
 Egor: 15/04/225 4.5 tuntia
+Egor: 17/04/2025 5.5 tuntia
 Henry: 15/04/25 5 tuntia
 
 Henry 16/04/25 2h 15 min
