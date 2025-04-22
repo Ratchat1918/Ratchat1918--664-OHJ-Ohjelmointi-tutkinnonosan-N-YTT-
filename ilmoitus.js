@@ -1,51 +1,73 @@
-let tuoteIndexLoacal=sessionStorage.getItem("tuoteIndex");
-tuoteIndexLoacal=Number(tuoteIndexLoacal);
-let urlLsit=[];
-let imgNum=0;
-function createSlideShow(){
-    fetch('./tavaraLista.json')
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(element => {
-                if(element.tuoteIndex===tuoteIndexLoacal){
-                    element.kuvaUrl.forEach(imgUrl=>{
-                        urlLsit.push(imgUrl);
-                    })
-                }
-                document.getElementById("slideshowContainer").innerHTML=`<img img id="imgTuote" src="${urlLsit[imgNum]}" style="max-width: 500px;">`;
-            });
-        });
-};
-createSlideShow();
-function createTuoteInfo(){
-    fetch('./tavaraLista.json')
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(element => {
-                if(element.tuoteIndex===tuoteIndexLoacal){
-                    document.getElementById("tuoteNimi").textContent=`${element.tuoteNimi}`;
-                    document.getElementById("tuoteInfo").innerHTML+=`<p>${element.tuoteKuvausPitka}</p>`;
-                }
-            });
-        });
-};
-createTuoteInfo();
+let tuoteIndexSession = Number(sessionStorage.getItem("tuoteIndex"));
+let imgNum = 1;
+let slideIndex = 0;
+let intervalId;
 
+function createSlides() {
+    const slidesContainer = document.getElementsByClassName("slides")[0];
+    slidesContainer.innerHTML = "";
+    fetch('./tavaraLista.json')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(element => {
+                if (element.tuoteIndex === tuoteIndexSession) {
+                    element.kuvaUrl.forEach(imgUrl => {
+                        slidesContainer.innerHTML += `<img class="slide" src="${imgUrl}" alt="Image #${imgNum}">`;
+                        imgNum++;
+                    });
+                    initializeSlider();
+                }
+            });
+        });
+}
+
+function createInfo(){
+    fetch('./tavaraLista.json')
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(element => {
+            if (element.tuoteIndex === tuoteIndexSession) {
+                document.getElementById("nimiH1").textContent=element.tuoteNimi;
+                document.getElementById("tuoteHintaH1").textContent=`${element.tuoteHinta} €`;
+                document.getElementById("tuoteInfoP").textContent=`${element.tuoteKuvausPitka}`;
+            }
+        });
+    });
+}
 function addToCart(){
-    
+    sessionStorage.setItem(`valitsettu${tuoteIndexSession}`,tuoteIndexSession);
 }
 
-function nextImg(){
-    if(imgNum<urlLsit.length-1){
-        imgNum++;
-        console.log(imgNum);
-        document.getElementById("slideshowContainer").innerHTML=`<img img id="imgTuote" src="${urlLsit[imgNum]}" style="max-width: 500px;">`;
+function initializeSlider() {
+    const slides = document.querySelectorAll(".slides img");
+    if (slides.length > 0) {
+        slides[slideIndex].classList.add("displaySlide");
     }
 }
-function previousImg(){
-    if(imgNum>0){
-        imgNum--;
-        console.log(imgNum);
-        document.getElementById("slideshowContainer").innerHTML=`<img id="imgTuote" src="${urlLsit[imgNum]}">`;
+
+function showSlide(index, slides) {
+    if (index >= slides.length) {
+        slideIndex = 0;
+    } else if (index < 0) {
+        slideIndex = slides.length - 1;
     }
+
+    slides.forEach(slide => slide.classList.remove("displaySlide"));
+    slides[slideIndex].classList.add("displaySlide");
 }
+
+function prevSlide() {
+    const slides = document.querySelectorAll(".slides img");
+    clearInterval(intervalId);
+    slideIndex--;
+    showSlide(slideIndex, slides);
+}
+
+function nextSlide() {
+    const slides = document.querySelectorAll(".slides img");
+    slideIndex++;
+    showSlide(slideIndex, slides);
+}
+
+document.addEventListener("DOMContentLoaded", createSlides);
+document.addEventListener("DOMContentLoaded", createInfo);
