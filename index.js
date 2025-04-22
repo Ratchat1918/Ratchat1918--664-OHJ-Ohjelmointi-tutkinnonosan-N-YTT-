@@ -94,7 +94,7 @@ function loginUser() {                      /**SISÄÄNKIRJAUTMISFUNKTIO */
     }
 };
 
-function sellBtn() {
+function sellBtn() {                    /**FUNKTIO MYYNTIILMOITUKSEN TEOLLE JA TÄLLE TAPAHTUMAKUUNTELIJA */
     let myyBtn = document.getElementById("sell");
     let sellElement = document.createElement("button");
     sellElement.id = "myydaBtn";
@@ -164,7 +164,7 @@ document.getElementById("productPrice").addEventListener("keypress", function(ev
 });
 
 document.getElementById("productPicture").addEventListener("change", function(event) {
-    let file = event.target.files[0];
+    let file = event.target.files[0];                       /**TAPAHTUMAKUUNTELIJA KUN KÄYTTÄJÄ LISÄÄ KUVAN MYYTÄVÄLLE TUOTTEELLE */
     if (file) {
         let reader = new FileReader();
         reader.onload = function(e) {
@@ -181,7 +181,7 @@ document.getElementById("productPicture").addEventListener("change", function(ev
 });
 
 document.getElementById("publishBtn").addEventListener("click", function(event) {
-    event.preventDefault();
+    event.preventDefault();                 /**KUN KÄYTTÄJÄ JULKAISEE MYYNTITILMOITUKSENSA */
     let syötettyTuote = document.getElementById("productName").value.trim();
     let syötettyLyhytKuvaus = document.getElementById("productDetail").value.trim();
     let syötettyTuoteKuvaus = document.getElementById("productDescription").value.trim();
@@ -223,7 +223,7 @@ document.getElementById("confirmOkBtn").addEventListener("click", function() {
     document.getElementById("detailsModal").reset(); 
 });
 
-function getJsonProducts() {
+function getJsonProducts() {            /**HAKEE VALMIIKSI LISÄTYT TIEDOT JSON TIEDOSTOSTA JA TALLENTAA NE LOCALSTORAGEEN */
 let storedProducts = localStorage.getItem("products");
 if (storedProducts) {
     console.log("Tuotteet haettu localStoragesta");
@@ -245,7 +245,7 @@ if (storedProducts) {
         .catch(error => console.error("Virhe JSON-tiedoston latauksessa:", error));
 };
 
-function showProducts() {
+function showProducts() {               /**NÄYTTÄÄ KAIKKI TUOTTEET LOCALSTORAGESTA */
     let products = JSON.parse(localStorage.getItem("products")) || [];
     let productList = document.getElementById("kauppaContainer");
 
@@ -270,7 +270,7 @@ function showProducts() {
     });
 }
 
-function publishedBtn() {
+function publishedBtn() {               /**LUO OMAT ILMOITUKSET NAPIN JA AVAA PANEELIN JOSSA NÄHTÄVISSÄ OMAT JULKAISUT*/
     let julkaisutBtn = document.getElementById("publishedItems");
     let publishedElement = document.createElement("button");
     publishedElement.id = "publishedBtn";
@@ -285,7 +285,7 @@ function publishedBtn() {
 document.addEventListener("DOMContentLoaded", function() {
     showPublishedItems();
 });
-function showPublishedItems() {
+function showPublishedItems() {         /**NÄYTTÄÄ PANEELISSA KAIKKI OMAT JUKAISUT */
     let publisher = localStorage.getItem("loggedInUser");
     let products = JSON.parse(localStorage.getItem("products")) || [];
     let formPanel = document.querySelector("#publishedForm");
@@ -308,7 +308,7 @@ function showPublishedItems() {
         `;
         formPanel.appendChild(productElement);
     });
-    document.querySelectorAll(".deleteItemBtn").forEach(button => {
+    document.querySelectorAll(".deleteItemBtn").forEach(button => {     /**TUOTTEEN POISTO PAINIKE JA TÄLLE TAPAHTUMAKUUNTELIJA */
         button.addEventListener("click", function() {
             let indexToDelete = this.getAttribute("data-index");
             let products = JSON.parse(localStorage.getItem("products")) || [];
