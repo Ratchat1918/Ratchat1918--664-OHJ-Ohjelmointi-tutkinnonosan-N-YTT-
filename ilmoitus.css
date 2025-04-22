@@ -138,24 +138,58 @@ button {
     font-size: 16px;
     cursor: pointer;
 }
-#imgChangeContainer{
-    text-align: center;
+.slider{
+    position: relative;
+    width: 50%;
+    margin: auto;
+    overflow: hidden;
 }
-#slideshowContainer{
-    text-align: center;
+.slider img{
+    width: 100%;
+    display: none;
+    border-radius: 50px;
+    border: solid black 2px;
 }
-#imgTuote{
-    box-shadow: 10px 10px rgba(0, 0, 0, 0.167);
-    padding: 20px;
-    display: inline-block;
-    border: 1px solid rgb(80, 80, 80);
-    border-radius: 10px;
-    margin-bottom: 10px;
-    max-width: 500px;
-    max-height: 500;
+img.displaySlide{
+    display: block;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+.slider button{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    padding: 10px 15px;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.prev{
+    left: 0;
+}
+.next{
+    right: 0;
+}
+@keyframes fade {
+    from {opacity: .5}
+    to {opacity: 1}
+}
+#nimiH1{
+    text-align: center;
 }
 #tuoteInfo{
+    position: relative;
     text-align: center;
+    margin: auto;
+}
+#cartBtn{
+    width: 10%;
+    height: 10%;
+}
+#cartBtn:hover{
+    background-color: rgba(0, 89, 255, 0.568);
 }
 #tuoteNimi{
     text-align: center;
