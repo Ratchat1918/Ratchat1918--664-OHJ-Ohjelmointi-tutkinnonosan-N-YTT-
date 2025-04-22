@@ -88,6 +88,7 @@ function loginUser() {                      /**SISÄÄNKIRJAUTMISFUNKTIO */
         localStorage.setItem("loggedInUser", loginUsername);
         document.getElementById("logBtn").innerText = "Kirjaudu ulos";
         sellBtn();
+        publishedBtn();
     } else {
         document.getElementById("inCorrect").innerText = "Virheellinen käyttäjänimi tai salasana.";
     }
@@ -108,7 +109,6 @@ function sellBtn() {
         previewPicture.innerHTML = '';
         document.getElementById("inValidDetails").innerText = "";
         document.getElementById("productModal").style.display = "flex";
-        console.log("Myy klikattu");
     });
 };
 
@@ -172,7 +172,8 @@ document.getElementById("productPicture").addEventListener("change", function(ev
             previewPicture.innerHTML = '';
             let imgPreview = document.createElement("img");
             imgPreview.src = e.target.result;
-            imgPreview.style.maxWidth = "200px";
+            imgPreview.style.maxWidth = "100px";
+            imgPreview.style.maxHeight = "180px";
             previewPicture.appendChild(imgPreview);
         };
         reader.readAsDataURL(file);
@@ -186,31 +187,35 @@ document.getElementById("publishBtn").addEventListener("click", function(event) 
     let syötettyTuoteKuvaus = document.getElementById("productDescription").value.trim();
     let syötettyHinta = document.getElementById("productPrice").value.trim();
     let syötettyKuva = document.getElementById("productPicture").files[0];
+    let publisher = localStorage.getItem("loggedInUser");
 
     if (!syötettyTuote || !syötettyLyhytKuvaus || !syötettyTuoteKuvaus || !syötettyHinta || !syötettyKuva) {
         document.getElementById("inValidDetails").innerText = "Kaikki kentät, mukaan lukien kuvatiedosto, on täytettävä.";
         return;
     }
+    let reader = new FileReader();
+    reader.readAsDataURL(syötettyKuva);
+    reader.onload = function() {
+        let NewProduct = {
+            tuoteIndex: Date.now(),
+            tuoteNimi: syötettyTuote,
+            kuvaUrl: reader.result,
+            tuoteKuvausLyhyt: syötettyLyhytKuvaus,
+            tuoteKuvausPitka: syötettyTuoteKuvaus,
+            tuoteHinta: Number(syötettyHinta),
+            onkoOstoskorissa: false,
+            tuotteenJulkaisija: publisher
+        };
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+        products.push(NewProduct);
+        localStorage.setItem("products", JSON.stringify(products));
 
-    let NewProduct = {
-        tuoteIndex: Date.now(),
-        tuoteNimi: syötettyTuote,
-        kuvaUrl: URL.createObjectURL(syötettyKuva),
-        tuoteKuvausLyhyt: syötettyLyhytKuvaus,
-        tuoteKuvausPitka: syötettyTuoteKuvaus,
-        tuoteHinta: Number(syötettyHinta),
-        onkoOstoskorissa: false
+        document.getElementById("inValidDetails").textContent = "";
+        document.getElementById("productModal").style.display = "none";
+        document.getElementById("confirmationModal").style.display = "block";
+
+        showProducts();
     };
-
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    products.push(NewProduct);
-    localStorage.setItem("products", JSON.stringify(products));
-
-    document.getElementById("inValidDetails").textContent = "";
-    document.getElementById("productModal").style.display = "none";
-    document.getElementById("confirmationModal").style.display = "block";
-
-    showProducts();
 });
 
 document.getElementById("confirmOkBtn").addEventListener("click", function() {
@@ -229,8 +234,11 @@ if (storedProducts) {
     fetch("./tavaraLista.json")
         .then(res => res.json())
         .then(data => {
-            let products = JSON.parse(localStorage.getItem("products")) || [];
-            products = [...data, ...products];
+            let existingProducts = JSON.parse(localStorage.getItem("products")) || [];
+            let products = [...existingProducts, ...data.map(product => ({
+                ...product,
+                tuoteIndex:product.tuoteIndex || Date.now() + Math.random()   
+            }))];
             localStorage.setItem("products", JSON.stringify(products));
             showProducts();
         })
@@ -261,6 +269,61 @@ function showProducts() {
         x++;
     });
 }
+
+function publishedBtn() {
+    let julkaisutBtn = document.getElementById("publishedItems");
+    let publishedElement = document.createElement("button");
+    publishedElement.id = "publishedBtn";
+    publishedElement.innerText = "Omat ilmoitukset";
+    julkaisutBtn.appendChild(publishedElement);
+
+    publishedElement.addEventListener("click", function() {
+        showPublishedItems();
+        document.getElementById("publishedPanel").classList.add("open");
+    });
+};
+document.addEventListener("DOMContentLoaded", function() {
+    showPublishedItems();
+});
+function showPublishedItems() {
+    let publisher = localStorage.getItem("loggedInUser");
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let formPanel = document.querySelector("#publishedForm");
+
+    formPanel.innerHTML = "";
+
+    let userProducts = products.filter(product => product.tuotteenJulkaisija === publisher);
+
+    if (userProducts.length === 0) {
+        formPanel.innerHTML = "<p>Ei julkaistuja ilmoituksia.</p>";
+        return;
+    }
+    userProducts.forEach((product) => {
+        let productElement = document.createElement("div");
+        productElement.classList.add("published-item");
+        productElement.innerHTML = `
+            <p><strong>${product.tuoteNimi}</strong></p>
+            <p>Hinta: ${product.tuoteHinta} €</p>
+            <button class="deleteItemBtn" data-index="${product.tuoteIndex}">🗑️</button>
+        `;
+        formPanel.appendChild(productElement);
+    });
+    document.querySelectorAll(".deleteItemBtn").forEach(button => {
+        button.addEventListener("click", function() {
+            let indexToDelete = this.getAttribute("data-index");
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            products = products.filter(product => product.tuoteIndex != indexToDelete);
+            localStorage.setItem("products", JSON.stringify(products));
+            showProducts();
+            showPublishedItems();
+        });
+    });
+};
+
+document.getElementById("closeBtnPublish").addEventListener("click", function() {
+    document.getElementById("publishedPanel").classList.remove("open");
+});
+
 window.onload = function() {
     getJsonProducts();
     showProducts();
