@@ -87,9 +87,29 @@ function loginUser() {                      /**SISÄÄNKIRJAUTMISFUNKTIO */
         document.getElementById("loginPanel").classList.remove("open");
         localStorage.setItem("loggedInUser", loginUsername);
         document.getElementById("logBtn").innerText = "Kirjaudu ulos";
+        sellBtn();
     } else {
         document.getElementById("inCorrect").innerText = "Virheellinen käyttäjänimi tai salasana.";
     }
+};
+
+function sellBtn() {
+    let myyBtn = document.getElementById("sell");
+    let sellElement = document.createElement("button");
+    sellElement.id = "myydaBtn";
+    sellElement.innerText = "Myy";
+    myyBtn.appendChild(sellElement);
+    sellElement.addEventListener("click", function() {
+        document.getElementById("productName").value = "";
+        document.getElementById("productDetail").value = "";
+        document.getElementById("productDescription").value = "";
+        document.getElementById("productPrice").value = "";
+        document.getElementById("productPicture").value = "";
+        previewPicture.innerHTML = '';
+        document.getElementById("inValidDetails").innerText = "";
+        document.getElementById("productModal").style.display = "flex";
+        console.log("Myy klikattu");
+    });
 };
 
 window.onload = function() {     /**TARKASTAA ONKO KÄYTTÄJÄ KIRJAUTUNUT */
@@ -132,17 +152,6 @@ function luodaTavaraLista() {
 function myydaTuote() {
     window.open("myyjanSivu.html");
 }
-
-document.getElementById("myydaBtn").addEventListener("click", function() {
-    document.getElementById("productName").value = "";
-    document.getElementById("productDetail").value = "";
-    document.getElementById("productDescription").value = "";
-    document.getElementById("productPrice").value = "";
-    document.getElementById("productPicture").value = "";
-    previewPicture.innerHTML = '';
-    document.getElementById("inValidDetails").innerText = "";
-    document.getElementById("productModal").style.display = "flex";
-});
 
 document.getElementById("productCloseModal").addEventListener("click", function() {
     document.getElementById("productModal").style.display = "none";
@@ -210,6 +219,13 @@ document.getElementById("confirmOkBtn").addEventListener("click", function() {
 });
 
 function getJsonProducts() {
+let storedProducts = localStorage.getItem("products");
+if (storedProducts) {
+    console.log("Tuotteet haettu localStoragesta");
+    showProducts();
+    return;
+}
+
     fetch("./tavaraLista.json")
         .then(res => res.json())
         .then(data => {
@@ -250,4 +266,4 @@ window.onload = function() {
     showProducts();
 };
 
-localStorage.clear();
+//localStorage.clear();
