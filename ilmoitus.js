@@ -71,3 +71,5 @@ function nextSlide() {
 
 document.addEventListener("DOMContentLoaded", createSlides);
 document.addEventListener("DOMContentLoaded", createInfo);
+
+
