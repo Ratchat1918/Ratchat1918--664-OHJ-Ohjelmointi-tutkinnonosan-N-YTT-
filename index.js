@@ -74,11 +74,9 @@ function saveUser(username, password) {         /**TALLENTAA LOCAL STORAGEEN KÄ
 function loginUser() {                      /**SISÄÄNKIRJAUTMISFUNKTIO */
     let loginUsername = document.getElementById("username").value;
     let loginPassword = document.getElementById("password").value;
+    let container = document.querySelector(".container");
 
     let storedUsers = JSON.parse(localStorage.getItem("userData")) || [];
-
-    console.log("Kirjautumisen käyttäjänimi:", loginUsername);
-    console.log("Tallennetut käyttäjät:", storedUsers);
 
     let käyttäjä = storedUsers.find(user => user.name === loginUsername);
 
@@ -87,12 +85,18 @@ function loginUser() {                      /**SISÄÄNKIRJAUTMISFUNKTIO */
         document.getElementById("loginPanel").classList.remove("open");
         localStorage.setItem("loggedInUser", loginUsername);
         document.getElementById("logBtn").innerText = "Kirjaudu ulos";
+        container.style.display = "block";
         sellBtn();
         publishedBtn();
     } else {
         document.getElementById("inCorrect").innerText = "Virheellinen käyttäjänimi tai salasana.";
     }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+    let container = document.querySelector(".container");
+    container.style.display = "none";
+});
 
 function sellBtn() {                    /**FUNKTIO MYYNTIILMOITUKSEN TEOLLE JA TÄLLE TAPAHTUMAKUUNTELIJA */
     let myyBtn = document.getElementById("sell");
@@ -226,10 +230,9 @@ document.getElementById("confirmOkBtn").addEventListener("click", function() {
 function getJsonProducts() {            /**HAKEE VALMIIKSI LISÄTYT TIEDOT JSON TIEDOSTOSTA JA TALLENTAA NE LOCALSTORAGEEN */
 let storedProducts = localStorage.getItem("products");
 if (storedProducts) {
-    console.log("Tuotteet haettu localStoragesta");
     showProducts();
     return;
-}
+    }
 
     fetch("./tavaraLista.json")
         .then(res => res.json())
