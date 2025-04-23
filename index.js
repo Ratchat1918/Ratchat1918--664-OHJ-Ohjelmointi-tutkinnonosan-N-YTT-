@@ -309,15 +309,39 @@ function showPublishedItems() {         /**NÄYTTÄÄ PANEELISSA KAIKKI OMAT JUK
         formPanel.appendChild(productElement);
     });
     document.querySelectorAll(".deleteItemBtn").forEach(button => {     /**TUOTTEEN POISTO PAINIKE JA TÄLLE TAPAHTUMAKUUNTELIJA */
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
             let indexToDelete = this.getAttribute("data-index");
-            let products = JSON.parse(localStorage.getItem("products")) || [];
-            products = products.filter(product => product.tuoteIndex != indexToDelete);
-            localStorage.setItem("products", JSON.stringify(products));
-            showProducts();
-            showPublishedItems();
+            deleteAd(indexToDelete);
         });
     });
+};
+
+function deleteAd(indexToDelete) {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let productToDelete = products.find(product => product.tuoteIndex == indexToDelete);
+    let confirmDeleteMod = document.getElementById("confirmDeleteModal");
+    confirmDeleteMod.style.display = "block";
+    let modalOverlay = document.getElementById("modalOverlay");
+    modalOverlay.style.display = "block";
+    let deleteText = confirmDeleteMod.querySelector(".confirmDeleteText");
+    deleteText.textContent = `Haluatko varmasti poistaa ilmoituksen "${productToDelete.tuoteNimi}"?`;
+    let deleteBtn = confirmDeleteMod.querySelector(".yesDelete");
+    let cancelDeleteBtn = confirmDeleteMod.querySelector(".noDelete");
+
+    deleteBtn.onclick = function() {
+        products = products.filter(product => product.tuoteIndex != indexToDelete);
+        localStorage.setItem("products", JSON.stringify(products));
+        showProducts();
+        showPublishedItems();
+        confirmDeleteMod.style.display = "none";
+        modalOverlay.style.display = "none";
+    };
+    cancelDeleteBtn.onclick = function() {
+        confirmDeleteMod.style.display = "none";
+        modalOverlay.style.display = "none";
+    };
+    
 };
 
 document.getElementById("closeBtnPublish").addEventListener("click", function() {
