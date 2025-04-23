@@ -154,6 +154,8 @@ img.displaySlide{
     display: block;
     animation-name: fade;
     animation-duration: 1.5s;
+    width: 650px;
+    height: 350px;
 }
 .slider button{
     position: absolute;
