@@ -3,91 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="index.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="kuvat/duck.png">
-    <title>Kauppa</title>
+    <link href="ilmoitus.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="kuvat/duck.png">    
+    <title>Ilmoitus</title>
 </head>
 <body>
     <div id="navbarContainer">
         <a id="tunnus" href="#"><img src="kuvat/duck.png"></a>
         <nav>
             <p id="loggedUser"></p>
-            <a id="tunnus" href="#"><img src="kuvat/duck.png"></a>
             <div id="sell"></div>
+            <div id="publishedItems"></div>
             <button id="logBtn">Kirjaudu</button>
+            <div class="container">
+                <img onclick="console.log('jkdfhg')" src="kuvat/shoppingCart.png" id="ostosKoriImg">
+                <div class="centered">0</div>
+            </div>
         </nav>
     </div>
-    <div id="loginPanel" class="panel">
-        <span id="closeBtn">&times;</span>
-        <h2>Kirjaudu sisään</h2>
-        <form id="formPanel">
-            <label for="username">Käyttäjätunnus:</label>
-            <input type="text" id="username" name="username">
-            <label for="password">Salasana:</label>
-            <input type="password" id="password" name="password">
-            <button type="submit" id="loginBtn">Kirjaudu sisään</button>
-            <p id="inCorrect" style="color: blue;"></p>
-        </form>
+    <div id="publishedPanel" class="panel">
+        <span id="closeBtnPublish">&times;</span>
+        <h2>Omat ilmoitukset</h2>
+        <form id="publishedForm"></form>
+    </div>
+    <h1 id="nimiH1"></h1>
+    <div class="slider">
+        <div class="slides">
+            <img class="slide" src="" alt="Image #0">
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094</button>
+        <button class="next" onclick="nextSlide()">&#10095</button>
+    </div>
+    <div id="tuoteInfo">
+        <p id="tuoteInfoP"></p>
+        <h1 id="tuoteHintaH1"></h1>
+        <button id="cartBtn" onclick="addToCart()">
+            <img style="max-width: 100%; max-height: 100%;" src="kuvat/shoppingCart.png" >
+            Add to cart
+        </button>
+    </div>
+<script src="ilmoitus.js"   ></script>
+</html> 
 
-        <h2>Uusi käyttäjä?</h2>
-        <button id="openModal">Rekisteröidy</button>
-    </div>
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>
-            <h2>Uusi käyttäjä</h2>
-            <form id="registerModal">
-                <div>
-                    <label for="newUsername">Käyttäjätunnus:</label>
-                    <input type="text" id="newUsername" name="newUsername">
-                </div>
-                <div>
-                    <label for="newPassword">Salasana:</label>
-                    <input type="password" id="newPassword" name="newPassword">
-                </div>
-                <p id="inValidRegister" style="color: blue;"></p>
-                <button type="submit" id="registerBtn">Rekisteröidy</button>
-            </form>
-        </div>
-    </div>
-    <div id="productModal" class="productModal">
-        <div class="productModal-content">
-            <span id="productCloseModal" class="productClose">&times;</span>
-            <h2>Lisää tuote</h2>
-            <form id="detailsModal">
-                <div>
-                    <label for="productName">Tuote:</label>
-                    <input type="text" id="productName" name="productName">
-                </div>
-                <div>
-                    <label for="productdetail">Lyhyt kuvaus tuotteesta:</label>
-                    <input type="text" id="productDetail" name="productdetail">
-                </div>
-                <div>
-                    <label for="productDescription">Tuotteen kuvaus:</label>
-                    <textarea id="productDescription" name="productDescription"></textarea>
-                </div>
-                <div>
-                    <label for="productPrice">Tuotteen hinta:</label>
-                    <input type="number" id="productPrice" name="productPrice">
-                </div>
-                <div>
-                    <label for="productPicture">Lisää kuva:</label>
-                    <input type="file" id="productPicture" name="productPicture" accept="image/*">
-                    <div id="previewPicture"></div>
-                </div>
-                <p id="inValidDetails" style="color: blue;"></p>
-                <button type="submit" id="publishBtn">Julkaise</button>
-            </form>
-        </div>
-    </div>
-    <div id="confirmationModal">
-        <div class="productModal-content">
-            <p>Ilmoituksesi on nyt julkaistu</p>
-            <button id="confirmOkBtn">Ok</button>
-        </div>
-    </div>
-    <div id="kauppaContainer"></div>
-</body>
-<script src="index.js"></script>
-</html>
