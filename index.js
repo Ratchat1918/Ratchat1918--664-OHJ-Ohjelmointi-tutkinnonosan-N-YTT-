@@ -258,7 +258,7 @@ function showProducts() {               /**NÄYTTÄÄ KAIKKI TUOTTEET LOCALSTORA
         productElement = document.createElement("div");
         productElement.innerHTML = `
             <div onclick="valitaTuote(${x})" class="card">
-                <img id="tuoteKuva" src="${element.kuvaUrl}" />
+                <img id="tuoteKuva" src="${element.kuvaUrl[0]}" />
                 <h2>${element.tuoteNimi}</h2>
                 <p>${element.tuoteKuvausLyhyt}</p>
                 <p>${element.tuoteKuvausPitka}</p>
