@@ -4,6 +4,10 @@ let imgNum = 1;
 let slideIndex = 0;
 let intervalId;
 let dataLength;
+let amountOfThingsInCart=0;
+valitsettuTuoteLista=[1];
+sessionStorage.setItem("items",JSON.stringify(valitsettuTuoteLista));
+sessionStorage.setItem('amountOfThingsInCart',amountOfThingsInCart);
 function createSlides() {
     const slidesContainer = document.getElementsByClassName("slides")[0];
     slidesContainer.innerHTML = "";
@@ -45,13 +49,17 @@ function createInfo(){
             document.getElementById("titleIlmoitus").textContent=products[tuoteIndexSession].tuoteNimi;
                 document.getElementById("nimiH1").textContent=products[tuoteIndexSession].tuoteNimi;
                 document.getElementById("tuoteHintaH1").textContent=`${products[tuoteIndexSession].tuoteHinta} €`;
-                document.getElementById("tuoteInfoP").textContent=products[tuoteIndexSession].tuoteKuvausPitka
-                ;
+                document.getElementById("tuoteInfoP").textContent=products[tuoteIndexSession].tuoteKuvausPitka;
         }
     });
 }
 function addToCart(){
+    amountOfThingsInCart++;
+    sessionStorage.setItem('amountOfThingsInCart',amountOfThingsInCart);
+    document.getElementById("OstosKoriTouteMaaraDiv").textContent=sessionStorage.getItem("amountOfThingsInCart");
     sessionStorage.setItem(`valitsettu${tuoteIndexSession}`,tuoteIndexSession);
+    let itemLista=sessionStorage.getItem("items");
+    console.log(itemLista);
 }
 
 function initializeSlider() {
@@ -84,6 +92,9 @@ function nextSlide() {
     slideIndex++;
     showSlide(slideIndex, slides);
 }
+
+document.addEventListener("DOMContentLoaded", createSlides);
+document.addEventListener("DOMContentLoaded", createInfo);
 
 document.addEventListener("DOMContentLoaded", createSlides);
 document.addEventListener("DOMContentLoaded", createInfo);
