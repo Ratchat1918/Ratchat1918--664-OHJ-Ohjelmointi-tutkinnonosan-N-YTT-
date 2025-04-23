@@ -1,14 +1,16 @@
+
 let tuoteIndexSession = Number(sessionStorage.getItem("tuoteIndex"));
 let imgNum = 1;
 let slideIndex = 0;
 let intervalId;
-
+let dataLength;
 function createSlides() {
     const slidesContainer = document.getElementsByClassName("slides")[0];
     slidesContainer.innerHTML = "";
     fetch('./tavaraLista.json')
         .then(res => res.json())
         .then(data => {
+            dataLength=data.length;
             data.forEach(element => {
                 if (element.tuoteIndex === tuoteIndexSession) {
                     element.kuvaUrl.forEach(imgUrl => {
@@ -18,6 +20,11 @@ function createSlides() {
                     initializeSlider();
                 }
             });
+            if(tuoteIndexSession>dataLength-1){
+                let products = JSON.parse(localStorage.getItem("products")) || [];
+                slidesContainer.innerHTML += `<img class="slide" src="${products[tuoteIndexSession].kuvaUrl}" alt="Image #${1}">`;
+                initializeSlider();
+            }
         });
 }
 
@@ -27,11 +34,20 @@ function createInfo(){
     .then(data => {
         data.forEach(element => {
             if (element.tuoteIndex === tuoteIndexSession) {
+                document.getElementById("titleIlmoitus").textContent=element.tuoteNimi;
                 document.getElementById("nimiH1").textContent=element.tuoteNimi;
                 document.getElementById("tuoteHintaH1").textContent=`${element.tuoteHinta} €`;
                 document.getElementById("tuoteInfoP").textContent=`${element.tuoteKuvausPitka}`;
             }
         });
+        if(tuoteIndexSession>dataLength-1){
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            document.getElementById("titleIlmoitus").textContent=products[tuoteIndexSession].tuoteNimi;
+                document.getElementById("nimiH1").textContent=products[tuoteIndexSession].tuoteNimi;
+                document.getElementById("tuoteHintaH1").textContent=`${products[tuoteIndexSession].tuoteHinta} €`;
+                document.getElementById("tuoteInfoP").textContent=products[tuoteIndexSession].tuoteKuvausPitka
+                ;
+        }
     });
 }
 function addToCart(){
@@ -71,5 +87,4 @@ function nextSlide() {
 
 document.addEventListener("DOMContentLoaded", createSlides);
 document.addEventListener("DOMContentLoaded", createInfo);
-
 
