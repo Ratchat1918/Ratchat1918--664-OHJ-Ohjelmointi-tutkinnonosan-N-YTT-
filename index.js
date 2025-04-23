@@ -348,6 +348,16 @@ document.getElementById("closeBtnPublish").addEventListener("click", function() 
     document.getElementById("publishedPanel").classList.remove("open");
 });
 
+function openChart() {
+    let shoppingPanel = document.getElementById("shoppingChartPanel");
+        shoppingPanel.style.right = "0px";
+};
+
+function closeShoppingPanel() {
+    let shoppingPanel = document.getElementById("shoppingChartPanel");
+    shoppingPanel.style.right = "-295px";
+};
+
 window.onload = function() {
     getJsonProducts();
     showProducts();

@@ -16,7 +16,7 @@
             <div id="publishedItems"></div>
             <button id="logBtn">Kirjaudu</button>
             <div class="container">
-                <img onclick="console.log('jkdfhg')" src="kuvat/shoppingCart.png" id="ostosKoriImg">
+                <img onclick="openChart()" src="kuvat/shoppingCart.png" id="ostosKoriImg">
                 <div class="centered">0</div>
             </div>
         </nav>
@@ -40,6 +40,10 @@
         <span id="closeBtnPublish">&times;</span>
         <h2>Omat ilmoitukset</h2>
         <form id="publishedForm"></form>
+    </div>
+    <div id="shoppingChartPanel" class="panel">
+        <span id="closeBtnShopping" onclick="closeShoppingPanel()">&times;</span>
+        <h2>Ostoskori</h2>
     </div>
     <div id="modalOverlay"></div>
     <div id="confirmDeleteModal">
