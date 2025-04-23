@@ -89,7 +89,6 @@ nav button {
     cursor: pointer;
 }
 
-<<<<<<< HEAD
 .published-item {
     display: flex;
     justify-content: space-between;
@@ -161,8 +160,6 @@ nav button {
     font-size: 18px;
 }
 
-=======
->>>>>>> 442c0507fc0c6faf86885158da4a5297b4296321
 #username, #password {
     margin: 10px 0;
 }
@@ -300,7 +297,6 @@ button {
 }
 #ostosKoriImg:hover{
     background-color: rgba(255, 47, 47, 0.938);
-}
     display: flex;
     justify-content: center;
     align-items: center;
