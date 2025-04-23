@@ -140,7 +140,8 @@ button {
 }
 .slider{
     position: relative;
-    width: 50%;
+    width: 500px;
+    height: auto;
     margin: auto;
     overflow: hidden;
 }
@@ -154,8 +155,6 @@ img.displaySlide{
     display: block;
     animation-name: fade;
     animation-duration: 1.5s;
-    width: 650px;
-    height: 350px;
 }
 .slider button{
     position: absolute;
@@ -209,3 +208,4 @@ img.displaySlide{
 #ostosKoriImg:hover{
     background-color: rgba(255, 47, 47, 0.938);
 }
+
