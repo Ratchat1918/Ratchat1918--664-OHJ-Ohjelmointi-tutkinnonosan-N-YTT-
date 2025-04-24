@@ -139,3 +139,23 @@ window.onload = function() {
 };
 
 localStorage.clear();
+
+
+
+
+document.getElementById("productPictures").addEventListener("change", function(event) {
+    let file = event.target.files[0];                       /**TAPAHTUMAKUUNTELIJA KUN KÄYTTÄJÄ LISÄÄ KUVAN MYYTÄVÄLLE TUOTTEELLE */
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            let previewPicture = document.getElementById("previewPicture");
+            previewPicture.innerHTML = '';
+            let imgPreview = document.createElement("img");
+            imgPreview.src = e.target.result;
+            imgPreview.style.maxWidth = "100px";
+            imgPreview.style.maxHeight = "180px";
+            previewPicture.appendChild(imgPreview);
+        };
+        reader.readAsDataURL(file);
+    }
+});

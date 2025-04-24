@@ -68,7 +68,10 @@ nav {
     right: 0;
     width: 250px;
     background-color: rgb(255, 0, 0);
-    border-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     padding: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -268,12 +271,10 @@ button {
 }
 
 #detailsModal {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
-
 #detailsModal div {
     display: flex;
     flex-direction: column;
@@ -312,10 +313,26 @@ button {
     resize: vertical;
 }
 
-#previewPicture {
-    display: flex;
+#previewPictures {
+    width: 100%;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
     justify-content: center;
-    align-items: center;
+    gap: 5px !important;
+    overflow: hidden;
+    height: auto;
+    /*width: 100%;*/
+}
+
+#previewPictures img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0;
+    padding: 0;
 }
 #cartBtn{
     width: 250px;

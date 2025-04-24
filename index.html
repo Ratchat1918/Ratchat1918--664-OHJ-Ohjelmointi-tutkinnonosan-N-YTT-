@@ -75,7 +75,7 @@
         </div>
     </div>
     <div id="productModal" class="productModal">
-        <div class="productModal-content">
+        <div class="modal-content">
             <span id="productCloseModal" class="productClose">&times;</span>
             <h2>Lisää tuote</h2>
             <form id="detailsModal">
@@ -84,7 +84,7 @@
                     <input type="text" id="productName" name="productName">
                 </div>
                 <div>
-                    <label for="productdetail">Lyhyt kuvaus tuotteesta:</label>
+                    <label for="productDetail">Lyhyt kuvaus tuotteesta:</label>
                     <input type="text" id="productDetail" name="productdetail">
                 </div>
                 <div>
@@ -96,9 +96,9 @@
                     <input type="number" id="productPrice" name="productPrice">
                 </div>
                 <div>
-                    <label for="productPicture">Lisää kuva:</label>
-                    <input type="file" id="productPicture" name="productPicture" accept="image/*">
-                    <div id="previewPicture"></div>
+                    <label for="productPicture">Lisää kuvat:</label>
+                    <input type="file" id="productPicture" name="productPicture" accept="image/*" multiple>
+                    <div id="previewPictures"></div>
                 </div>
                 <p id="inValidDetails" style="color: blue;"></p>
                 <button type="submit" id="publishBtn">Julkaise</button>

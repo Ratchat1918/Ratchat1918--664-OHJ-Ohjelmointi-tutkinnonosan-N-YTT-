@@ -2,7 +2,7 @@
     {
         "tuoteIndex":0,
         "tuoteNimi":"Esimerkki",
-        "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
+        "kuvaUrls":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvausLyhyt":"This is an example of a product",
         "tuoteKuvausPitka":"This plushie crawled out of hell so that YOU, yes you could buy it",
         "tuoteHinta":399,
@@ -11,7 +11,7 @@
     {
         "tuoteIndex":1,
         "tuoteNimi":"Esimerkki2",
-        "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
+        "kuvaUrls":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvausLyhyt":"This is an example of a product",
         "tuoteKuvausPitka":"This plushie crawled out of hell so that YOU, yes you could buy it",
         "tuoteHinta":399,
@@ -20,7 +20,7 @@
     {
         "tuoteIndex":2,
         "tuoteNimi":"Esimerkki3",
-        "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
+        "kuvaUrls":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvausLyhyt":"This is an example of a product",
         "tuoteKuvausPitka":"This plushie crawled out of hell so that YOU, yes you could buy it",
         "tuoteHinta":399,
@@ -29,7 +29,7 @@
     {
         "tuoteIndex":3,
         "tuoteNimi":"Esimerkki4",
-        "kuvaUrl":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
+        "kuvaUrls":["kuvat/totoro1.jpg","kuvat/totoro2.jpg","kuvat/totoro3.jpg","kuvat/totoro4.jpg"],
         "tuoteKuvausLyhyt":"This is an example of a product",
         "tuoteKuvausPitka":"This plushie crawled out of hell so that YOU, yes you could buy it",
         "tuoteHinta":399,

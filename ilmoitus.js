@@ -17,7 +17,7 @@ function createSlides() {
             dataLength=data.length;
             data.forEach(element => {
                 if (element.tuoteIndex === tuoteIndexSession) {
-                    element.kuvaUrl.forEach(imgUrl => {
+                    element.kuvaUrls.forEach(imgUrl => {
                         slidesContainer.innerHTML += `<img class="slide" src="${imgUrl}" alt="Image #${imgNum}">`;
                         imgNum++;
                     });
@@ -26,7 +26,7 @@ function createSlides() {
             });
             if(tuoteIndexSession>dataLength-1){
                 let products = JSON.parse(localStorage.getItem("products")) || [];
-                slidesContainer.innerHTML += `<img class="slide" src="${products[tuoteIndexSession].kuvaUrl}" alt="Image #${1}">`;
+                slidesContainer.innerHTML += `<img class="slide" src="${products[tuoteIndexSession].kuvaUrls}" alt="Image #${1}">`;
                 initializeSlider();
             }
         });

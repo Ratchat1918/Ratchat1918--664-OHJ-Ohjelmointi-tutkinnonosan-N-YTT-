@@ -116,7 +116,7 @@ function sellBtn() {                    /**FUNKTIO MYYNTIILMOITUKSEN TEOLLE JA T
     let myyBtn = document.getElementById("sell");
     let sellElement = document.createElement("button");
     sellElement.id = "myydaBtn";
-    sellElement.innerText = "Myy";
+    sellElement.innerText = "Uusi ilmoitus";
     myyBtn.appendChild(sellElement);
     sellElement.addEventListener("click", function() {
         menuItems.style.display = "none";
@@ -125,7 +125,7 @@ function sellBtn() {                    /**FUNKTIO MYYNTIILMOITUKSEN TEOLLE JA T
         document.getElementById("productDescription").value = "";
         document.getElementById("productPrice").value = "";
         document.getElementById("productPicture").value = "";
-        previewPicture.innerHTML = '';
+        previewPictures.innerHTML = '';
         document.getElementById("inValidDetails").innerText = "";
         document.getElementById("productModal").style.display = "flex";
     });
@@ -162,20 +162,26 @@ document.getElementById("productPrice").addEventListener("keypress", function(ev
 });
 
 document.getElementById("productPicture").addEventListener("change", function(event) {
-    let file = event.target.files[0];                       /**TAPAHTUMAKUUNTELIJA KUN KÄYTTÄJÄ LISÄÄ KUVAN MYYTÄVÄLLE TUOTTEELLE */
-    if (file) {
+    let files = event.target.files;                       /**TAPAHTUMAKUUNTELIJA KUN KÄYTTÄJÄ LISÄÄ KUVAN MYYTÄVÄLLE TUOTTEELLE */
+    if (files.length > 3) {
+        alert("Voit lisätä maksimissaan kolme kuvaa!");
+        event.target.value = "";
+        return;
+    }
+    let previewContainer = document.getElementById("previewPictures");
+    previewContainer.innerHTML = "";
+
+    
+
+    Array.from(files).forEach(file => {
         let reader = new FileReader();
         reader.onload = function(e) {
-            let previewPicture = document.getElementById("previewPicture");
-            previewPicture.innerHTML = '';
             let imgPreview = document.createElement("img");
             imgPreview.src = e.target.result;
-            imgPreview.style.maxWidth = "100px";
-            imgPreview.style.maxHeight = "180px";
-            previewPicture.appendChild(imgPreview);
+            previewContainer.appendChild(imgPreview);
         };
         reader.readAsDataURL(file);
-    }
+    });
 });
 
 document.getElementById("publishBtn").addEventListener("click", function(event) {
@@ -184,20 +190,29 @@ document.getElementById("publishBtn").addEventListener("click", function(event) 
     let syötettyLyhytKuvaus = document.getElementById("productDetail").value.trim();
     let syötettyTuoteKuvaus = document.getElementById("productDescription").value.trim();
     let syötettyHinta = document.getElementById("productPrice").value.trim();
-    let syötettyKuva = document.getElementById("productPicture").files[0];
+    let syötetytKuvat = document.getElementById("productPicture").files;
     let publisher = localStorage.getItem("loggedInUser");
 
-    if (!syötettyTuote || !syötettyLyhytKuvaus || !syötettyTuoteKuvaus || !syötettyHinta || !syötettyKuva) {
+    if (!syötettyTuote || !syötettyLyhytKuvaus || !syötettyTuoteKuvaus || !syötettyHinta || !syötetytKuvat.length === 0) {
         document.getElementById("inValidDetails").innerText = "Kaikki kentät, mukaan lukien kuvatiedosto, on täytettävä.";
         return;
     }
-    let reader = new FileReader();
-    reader.readAsDataURL(syötettyKuva);
-    reader.onload = function() {
+
+    let kuvaUrls = [];
+    let readers = Array.from(syötetytKuvat).map (file => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        return new Promise(resolve => {
+            reader.onload = () => resolve(reader.result);
+        });
+    });
+    Promise.all(readers).then(results => {
+        kuvaUrls.push(...results);
+        console.log(kuvaUrls);
         let NewProduct = {
             tuoteIndex: Date.now(),
             tuoteNimi: syötettyTuote,
-            kuvaUrl: reader.result,
+            kuvaUrls,
             tuoteKuvausLyhyt: syötettyLyhytKuvaus,
             tuoteKuvausPitka: syötettyTuoteKuvaus,
             tuoteHinta: Number(syötettyHinta),
@@ -213,7 +228,7 @@ document.getElementById("publishBtn").addEventListener("click", function(event) 
         document.getElementById("confirmationModal").style.display = "block";
 
         showProducts();
-    };
+    });
 });
 
 document.getElementById("confirmOkBtn").addEventListener("click", function() {
@@ -255,7 +270,7 @@ function showProducts() {               /**NÄYTTÄÄ KAIKKI TUOTTEET LOCALSTORA
         productElement = document.createElement("div");
         productElement.innerHTML = `
             <div onclick="valitaTuote(${x})" class="card">
-                <img id="tuoteKuva" src="${element.kuvaUrl[0]}" />
+                <img id="tuoteKuva" src="${element.kuvaUrls[0]}"/>
                 <h2>${element.tuoteNimi}</h2>
                 <p>${element.tuoteKuvausLyhyt}</p>
                 <p>${element.tuoteKuvausPitka}</p>
