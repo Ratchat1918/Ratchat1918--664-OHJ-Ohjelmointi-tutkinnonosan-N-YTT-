@@ -1,3 +1,16 @@
+const menuItems = document.getElementById("menuItems");
+
+document.getElementById("menuToggler").addEventListener("click", function() {
+    let menuItems = document.getElementById("menuItems");
+    if (menuItems.style.display === "flex" || menuItems.style.top === "100%") {
+        menuItems.style.display = "none";
+        menuItems.style.top = "-200px";
+    } else {
+        menuItems.style.display = "flex";
+        menuItems.style.top = "100%";
+    }
+});
+
 document.getElementById("logBtn").addEventListener("click", function() {    /**TAPAHTUMAKUUNTELIJA KIRJAUDU TAI KIRJAUDU ULOS PAINIKKEELLE */
     document.getElementById("inCorrect").innerText ="";
     let loggedUser = document.getElementById("loggedUser");                 /**RIIPPUEN OLLAANKO KIRJAUTUNEEN SISÄÄN VAI ULKONA */
@@ -7,6 +20,7 @@ document.getElementById("logBtn").addEventListener("click", function() {    /**T
         location.reload();
     } else {
         document.getElementById("loginPanel").classList.add("open");
+        menuItems.style.display = "none";
     } 
 });
 
@@ -105,6 +119,7 @@ function sellBtn() {                    /**FUNKTIO MYYNTIILMOITUKSEN TEOLLE JA T
     sellElement.innerText = "Myy";
     myyBtn.appendChild(sellElement);
     sellElement.addEventListener("click", function() {
+        menuItems.style.display = "none";
         document.getElementById("productName").value = "";
         document.getElementById("productDetail").value = "";
         document.getElementById("productDescription").value = "";
@@ -131,27 +146,6 @@ function valitaTuote(tavaraIndex) {
 }
 
 const kauppaContainer = document.getElementById("kauppaContainer");
-
-function luodaTavaraLista() {
-    let x=0;//Tavaran index
-    fetch('./tavaraLista.json')
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(element => {
-                kauppaContainer.innerHTML += `
-                    <div onclick="valitaTuote(${x})" class="card">
-                        <img id="tuoteKuva" src="${element.kuvaUrl}" />
-                        <h2>${element.tuoteNimi}</h2>
-                        <p>${element.tuoteKuvaus}</p>
-                        <h2>${element.tuoteHinta} €</h2>
-                    </div>
-                `;
-                x++
-            });
-        });
-}
-
-//luodaTavaraLista();
 
 function myydaTuote() {
     window.open("myyjanSivu.html");
@@ -281,6 +275,7 @@ function publishedBtn() {               /**LUO OMAT ILMOITUKSET NAPIN JA AVAA PA
     julkaisutBtn.appendChild(publishedElement);
 
     publishedElement.addEventListener("click", function() {
+        menuItems.style.display = "none";
         showPublishedItems();
         document.getElementById("publishedPanel").classList.add("open");
     });
@@ -352,6 +347,7 @@ document.getElementById("closeBtnPublish").addEventListener("click", function() 
 });
 
 function openChart() {
+    menuItems.style.display = "none";
     let shoppingPanel = document.getElementById("shoppingChartPanel");
         shoppingPanel.style.right = "0px";
 };

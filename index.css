@@ -1,4 +1,8 @@
 #navbarContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
     background-color: rgb(255, 0, 0);
     max-width: 100%;
     max-height: 10%;
@@ -41,12 +45,48 @@ body {
     padding: 0;
 }
 
+#rightElements {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 nav {
     padding: 10px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
+}
+
+#menuItems {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    align-items: flex-end;
+    top: 100%;
+    right: 0;
+    width: 250px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: right 0.7s ease-in-out;
+}
+
+#menuItems div, #menuItems button {
+    margin: 3px;
+}
+
+#menuToggler {
+    display: block;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
 }
 
 nav button {
@@ -218,7 +258,7 @@ nav button {
 }
 
 button {
-    background-color: rgb(0, 89, 255);
+    background-color: black;
     color: white;
     padding: 10px 20px;
     border: none;
