@@ -1,13 +1,22 @@
-document.getElementById("myydaBtn").addEventListener("click", function() {
-    document.getElementById("productName").value = "";
-    document.getElementById("productDetail").value = "";
-    document.getElementById("productDescription").value = "";
-    document.getElementById("productPrice").value = "";
-    document.getElementById("productPicture").value = "";
-    previewPicture.innerHTML = '';
-    document.getElementById("inValidDetails").innerText = "";
-    document.getElementById("productModal").style.display = "flex";
-});
+/**FUNKTIO MYYNTIILMOITUKSEN TEOLLE JA TÄLLE TAPAHTUMAKUUNTELIJA */
+function sellBtn() {     
+    let myyBtn = document.getElementById("sell");
+    let sellElement = document.createElement("button");
+    sellElement.id = "myydaBtn";
+    sellElement.innerText = "Uusi ilmoitus";
+    myyBtn.appendChild(sellElement);
+    sellElement.addEventListener("click", function() {
+        menuItems.style.display = "none";
+        document.getElementById("productName").value = "";
+        document.getElementById("productDetail").value = "";
+        document.getElementById("productDescription").value = "";
+        document.getElementById("productPrice").value = "";
+        document.getElementById("productPicture").value = "";
+        previewPictures.innerHTML = '';
+        document.getElementById("inValidDetails").innerText = "";
+        document.getElementById("productModal").style.display = "flex";
+    });
+};
 
 document.getElementById("productCloseModal").addEventListener("click", function() {
     document.getElementById("productModal").style.display = "none";
@@ -19,54 +28,75 @@ document.getElementById("productPrice").addEventListener("keypress", function(ev
     }
 });
 
+/**TAPAHTUMAKUUNTELIJA KUN KÄYTTÄJÄ LISÄÄ KUVAN MYYTÄVÄLLE TUOTTEELLE */
 document.getElementById("productPicture").addEventListener("change", function(event) {
-    let file = event.target.files[0];
-    if (file) {
+    let files = event.target.files;                       
+    if (files.length > 3) {
+        alert("Voit lisätä maksimissaan kolme kuvaa!");
+        event.target.value = "";
+        return;
+    }
+    let previewContainer = document.getElementById("previewPictures");
+    previewContainer.innerHTML = "";
+
+    
+
+    Array.from(files).forEach(file => {
         let reader = new FileReader();
         reader.onload = function(e) {
-            let previewPicture = document.getElementById("previewPicture");
-            previewPicture.innerHTML = '';
             let imgPreview = document.createElement("img");
             imgPreview.src = e.target.result;
-            imgPreview.style.maxWidth = "200px";
-            previewPicture.appendChild(imgPreview);
+            previewContainer.appendChild(imgPreview);
         };
         reader.readAsDataURL(file);
-    }
+    });
 });
 
+/**KUN KÄYTTÄJÄ JULKAISEE MYYNTITILMOITUKSENSA */
 document.getElementById("publishBtn").addEventListener("click", function(event) {
-    event.preventDefault();
+    event.preventDefault();                 
     let syötettyTuote = document.getElementById("productName").value.trim();
     let syötettyLyhytKuvaus = document.getElementById("productDetail").value.trim();
     let syötettyTuoteKuvaus = document.getElementById("productDescription").value.trim();
     let syötettyHinta = document.getElementById("productPrice").value.trim();
-    let syötettyKuva = document.getElementById("productPicture").files[0];
+    let syötetytKuvat = document.getElementById("productPicture").files;
+    let publisher = localStorage.getItem("loggedInUser");
 
-    if (!syötettyTuote || !syötettyLyhytKuvaus || !syötettyTuoteKuvaus || !syötettyHinta || !syötettyKuva) {
+    if (!syötettyTuote || !syötettyLyhytKuvaus || !syötettyTuoteKuvaus || !syötettyHinta || !syötetytKuvat.length === 0) {
         document.getElementById("inValidDetails").innerText = "Kaikki kentät, mukaan lukien kuvatiedosto, on täytettävä.";
         return;
     }
 
-    let NewProduct = {
-        tuoteIndex: Date.now(),
-        tuoteNimi: syötettyTuote,
-        kuvaUrl: URL.createObjectURL(syötettyKuva),
-        tuoteKuvausLyhyt: syötettyLyhytKuvaus,
-        tuoteKuvausPitka: syötettyTuoteKuvaus,
-        tuoteHinta: Number(syötettyHinta),
-        onkoOstoskorissa: false
-    };
+    let kuvaUrls = [];
+    let readers = Array.from(syötetytKuvat).map (file => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        return new Promise(resolve => {
+            reader.onload = () => resolve(reader.result);
+        });
+    });
+    Promise.all(readers).then(results => {
+        kuvaUrls.push(...results);
+        let NewProduct = {
+            tuoteIndex: Date.now(),
+            tuoteNimi: syötettyTuote,
+            kuvaUrls,
+            tuoteKuvausLyhyt: syötettyLyhytKuvaus,
+            tuoteKuvausPitka: syötettyTuoteKuvaus,
+            tuoteHinta: Number(syötettyHinta),
+            onkoOstoskorissa: false,
+            tuotteenJulkaisija: publisher
+        };
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+        products.push(NewProduct);
+        localStorage.setItem("products", JSON.stringify(products));
 
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    products.push(NewProduct);
-    localStorage.setItem("products", JSON.stringify(products));
+        document.getElementById("inValidDetails").textContent = "";
+        document.getElementById("productModal").style.display = "none";
+        document.getElementById("confirmationModal").style.display = "block";
 
-    document.getElementById("inValidDetails").textContent = "";
-    document.getElementById("productModal").style.display = "none";
-    document.getElementById("confirmationModal").style.display = "block";
-
-    showProducts();
+        showProducts();
+    });
 });
 
 document.getElementById("confirmOkBtn").addEventListener("click", function() {
@@ -74,88 +104,89 @@ document.getElementById("confirmOkBtn").addEventListener("click", function() {
     document.getElementById("detailsModal").reset(); 
 });
 
-const kauppaContainer = document.getElementById("kauppaContainer");
+/**LUO OMAT ILMOITUKSET NAPIN JA AVAA PANEELIN JOSSA NÄHTÄVISSÄ OMAT JULKAISUT*/
+function publishedBtn() {               
+    let julkaisutBtn = document.getElementById("publishedItems");
+    let publishedElement = document.createElement("button");
+    publishedElement.id = "publishedBtn";
+    publishedElement.innerText = "Omat ilmoitukset";
+    julkaisutBtn.appendChild(publishedElement);
 
-function luodaTavaraLista() {
-    let x=0;//Tavaran index
-    fetch('./tavaraLista.json')
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(element => {
-                kauppaContainer.innerHTML += `
-                    <div onclick="valitaTuote(${x})" class="card">
-                        <img id="tuoteKuva" src="${element.kuvaUrl}" />
-                        <h2>${element.tuoteNimi}</h2>
-                        <p>${element.tuoteKuvaus}</p>
-                        <h2>${element.tuoteHinta} €</h2>
-                    </div>
-                `;
-                x++
-            });
-        });
-}
-
-//luodaTavaraLista();
-
-function getJsonProducts() {
-    fetch("./tavaraLista.json")
-        .then(res => res.json())
-        .then(data => {
-            let products = JSON.parse(localStorage.getItem("products")) || [];
-            products = [...data, ...products];
-            localStorage.setItem("products", JSON.stringify(products));
-            showProducts();
-        })
-        .catch(error => console.error("Virhe JSON-tiedoston latauksessa:", error));
-};
-
-function showProducts() {
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    let productList = document.getElementById("kauppaContainer");
-
-    kauppaContainer.innerHTML = "";
-    
-
-    let x = 0;
-
-    products.forEach((element) => {
-        productElement = document.createElement("div");
-        productElement.innerHTML = `
-            <div onclick="valitaTuote(${x})" class="card">
-                <img id="tuoteKuva" src="${element.kuvaUrl}" />
-                <h2>${element.tuoteNimi}</h2>
-                <p>${element.tuoteKuvausLyhyt}</p>
-                <p>${element.tuoteKuvausPitka}</p>
-                <h2>${element.tuoteHinta} €</h2>
-            </div>
-        `;
-        productList.appendChild(productElement);
-        x++;
+    publishedElement.addEventListener("click", function() {
+        menuItems.style.display = "none";
+        showPublishedItems();
+        document.getElementById("publishedPanel").classList.add("open");
     });
-}
-window.onload = function() {
-    getJsonProducts();
-    showProducts();
 };
 
-localStorage.clear();
+document.addEventListener("DOMContentLoaded", function() {
+    showPublishedItems();
+});
 
+/**NÄYTTÄÄ PANEELISSA KAIKKI OMAT JUKAISUT */
+function showPublishedItems() {         
+    let publisher = localStorage.getItem("loggedInUser");
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let formPanel = document.querySelector("#publishedForm");
 
+    formPanel.innerHTML = "";
 
+    let userProducts = products.filter(product => product.tuotteenJulkaisija === publisher);
 
-document.getElementById("productPictures").addEventListener("change", function(event) {
-    let file = event.target.files[0];                       /**TAPAHTUMAKUUNTELIJA KUN KÄYTTÄJÄ LISÄÄ KUVAN MYYTÄVÄLLE TUOTTEELLE */
-    if (file) {
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            let previewPicture = document.getElementById("previewPicture");
-            previewPicture.innerHTML = '';
-            let imgPreview = document.createElement("img");
-            imgPreview.src = e.target.result;
-            imgPreview.style.maxWidth = "100px";
-            imgPreview.style.maxHeight = "180px";
-            previewPicture.appendChild(imgPreview);
-        };
-        reader.readAsDataURL(file);
+    if (userProducts.length === 0) {
+        formPanel.innerHTML = "<p>Ei julkaistuja ilmoituksia.</p>";
+        return;
     }
+    userProducts.forEach((product) => {
+        let productElement = document.createElement("div");
+        productElement.classList.add("published-item");
+        productElement.innerHTML = `
+            <p><strong>${product.tuoteNimi}</strong></p>
+            <p>Hinta: ${product.tuoteHinta} €</p>
+            <button class="deleteItemBtn" data-index="${product.tuoteIndex}">🗑️</button>
+        `;
+        formPanel.appendChild(productElement);
+    });
+
+    /**TUOTTEEN POISTO PAINIKE JA TÄLLE TAPAHTUMAKUUNTELIJA */
+    document.querySelectorAll(".deleteItemBtn").forEach(button => {     
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            let indexToDelete = this.getAttribute("data-index");
+            deleteAd(indexToDelete);
+        });
+    });
+};
+
+/**FUNKTIO KUN KÄYTTÄJÄ HALUAA POISTAA OMAN JULKAISUNSA */
+function deleteAd(indexToDelete) {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let productToDelete = products.find(product => product.tuoteIndex == indexToDelete);
+    let confirmDeleteMod = document.getElementById("confirmDeleteModal");
+    confirmDeleteMod.style.display = "block";
+    let modalOverlay = document.getElementById("modalOverlay");
+    modalOverlay.style.display = "block";
+    let deleteText = confirmDeleteMod.querySelector(".confirmDeleteText");
+    deleteText.textContent = `Haluatko varmasti poistaa ilmoituksen "${productToDelete.tuoteNimi}"?`;
+    let deleteBtn = confirmDeleteMod.querySelector(".yesDelete");
+    let cancelDeleteBtn = confirmDeleteMod.querySelector(".noDelete");
+
+    deleteBtn.onclick = function() {
+        products = products.filter(product => product.tuoteIndex != indexToDelete);
+        localStorage.setItem("products", JSON.stringify(products));
+        showProducts();
+        showPublishedItems();
+        confirmDeleteMod.style.display = "none";
+        modalOverlay.style.display = "none";
+    };
+    cancelDeleteBtn.onclick = function() {
+        confirmDeleteMod.style.display = "none";
+        modalOverlay.style.display = "none";
+    };
+    
+};
+
+/**OMAT JULKAISET PANEELIN SULKEMISTOIMINTO */
+document.getElementById("closeBtnPublish").addEventListener("click", function() {
+    document.getElementById("publishedPanel").classList.remove("open");
 });

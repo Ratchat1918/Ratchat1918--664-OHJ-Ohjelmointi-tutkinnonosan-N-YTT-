@@ -1,5 +1,6 @@
 const menuItems = document.getElementById("menuItems");
 
+/**TOGGLER VALIKOLLE TAPAHTUMAKUUNTELIJA */
 document.getElementById("menuToggler").addEventListener("click", function() {
     let menuItems = document.getElementById("menuItems");
     if (menuItems.style.display === "flex" || menuItems.style.top === "100%") {
@@ -11,129 +12,17 @@ document.getElementById("menuToggler").addEventListener("click", function() {
     }
 });
 
-document.getElementById("logBtn").addEventListener("click", function() {    /**TAPAHTUMAKUUNTELIJA KIRJAUDU TAI KIRJAUDU ULOS PAINIKKEELLE */
-    document.getElementById("inCorrect").innerText ="";
-    let loggedUser = document.getElementById("loggedUser");                 /**RIIPPUEN OLLAANKO KIRJAUTUNEEN SISÄÄN VAI ULKONA */
-    if (loggedUser.innerText) {
-        localStorage.removeItem("loggedInUser");
-        this.innerText = "Kirjaudu";
-        location.reload();
-    } else {
-        document.getElementById("loginPanel").classList.add("open");
-        menuItems.style.display = "none";
-    } 
-});
-
-document.getElementById("closeBtn").addEventListener("click", function() {  /**TAPAHTUMAKUUNTELIJA KIRJAUTUMISPANEELIN SULKEMISELLE */
-    document.getElementById("loginPanel").classList.remove("open");
-});
-
-document.getElementById("openModal").addEventListener("click", function() {    /**TAPAHTUMAKUUNTELIJA REKISTERÖITYMIS MODAALIN AUKAISEMISELLE*/
-    document.getElementById("modal").style.display = "flex";
-    document.getElementById("loginPanel").classList.remove("open");
-    document.getElementById("inValidRegister").innerText = "";
-});
-
-document.getElementById("closeModal").addEventListener("click", function() {    /**TAPAHTUMAKUUNTELIJA REKISTERÖITYMIS MODAALIN SULKEMISELLE*/
-    document.getElementById("modal").style.display = "none";
-});
-
-document.getElementById("registerBtn").addEventListener("click", function(event) {  /**TAPAHTUMAKUUNTELIJA REKISTERÖIDY PAINIKKEELLE */
-    event.preventDefault();
-    registerUser();
-});
-
-document.getElementById("loginBtn").addEventListener("click", function(event) {     /**TAPAHTUMAKUUNTELIJA SISÄÄNKIRJAUTUMISELLE */
-    event.preventDefault();
-    loginUser();
-});
-
-function registerUser() {
-    let syötettyKäyttäjänimi = document.getElementById("newUsername").value;
-    let syötettySalasana = document.getElementById("newPassword").value;
-
-    if (syötettyKäyttäjänimi.length > 0 && syötettySalasana.length > 0) {   /**TARKASTAA ONKO KÄYTTÄJÄ SYÖTTÄNYT REKISTERÖINTI INPUT KENTTIIN ARVOJA */
-        let storedUsers = JSON.parse(localStorage.getItem("userData")) || [];
-
-        if (!Array.isArray(storedUsers)) {          /**VARMISTAA ETTÄ LOCAL STORAGEEN ON AINA TALLENNETTU TAULUKKOJA */
-            storedUsers = [];
-        }
-
-        let userNameInUse = storedUsers.some(user => user.name === syötettyKäyttäjänimi);   /**TARKASTAA ONKO SAMANNIMISTÄ KÄYTTÄJÄNIMEÄ VIELÄ LUOTU */
-        if (userNameInUse) {
-            document.getElementById("inValidRegister").innerText = `Käyttäjänimi "${syötettyKäyttäjänimi}" on jo käytössä, valitse toinen.`;
-            document.getElementById("newUsername").value = "";
-            document.getElementById("newPassword").value = "";
-        } else {
-            alert("Tili luotu onnistuneesti!");
-            saveUser(syötettyKäyttäjänimi, syötettySalasana);
-            document.getElementById("modal").style.display = "none";
-            document.getElementById("newUsername").value = "";
-            document.getElementById("newPassword").value = "";
-        }
-    } else {
-        document.getElementById("inValidRegister").innerText = "Käyttäjänimi tai salasana on virheellinen."
-    }
-};
-
-function saveUser(username, password) {         /**TALLENTAA LOCAL STORAGEEN KÄYTTÄJÄN SYÖTTÄMÄN KÄYTTÄJÄNIMEN JA SALASANAN */
-    let users = JSON.parse(localStorage.getItem("userData")) || [];
-    if (!Array.isArray(users)) {
-        users = [];
-    }
-    users.push({name: username, password: password});
-    localStorage.setItem("userData", JSON.stringify(users));
-};
-
-function loginUser() {                      /**SISÄÄNKIRJAUTMISFUNKTIO */
-    let loginUsername = document.getElementById("username").value;
-    let loginPassword = document.getElementById("password").value;
-    let container = document.querySelector(".container");
-
-    let storedUsers = JSON.parse(localStorage.getItem("userData")) || [];
-
-    let käyttäjä = storedUsers.find(user => user.name === loginUsername);
-
-    if (käyttäjä && loginPassword === käyttäjä.password) {      /**TARKASTAA ETTÄ KÄYTTÄJÄNIMI ON REKISTERÖITY JA SALASANA VASTAA SYÖTETTYÄ */
-        document.getElementById("loggedUser").innerText = "Tervetuloa " + loginUsername + "!";
-        document.getElementById("loginPanel").classList.remove("open");
-        localStorage.setItem("loggedInUser", loginUsername);
-        document.getElementById("logBtn").innerText = "Kirjaudu ulos";
-        container.style.display = "block";
-        sellBtn();
-        publishedBtn();
-    } else {
-        document.getElementById("inCorrect").innerText = "Virheellinen käyttäjänimi tai salasana.";
-    }
-};
-
 document.addEventListener("DOMContentLoaded", () => {
     let container = document.querySelector(".container");
     container.style.display = "none";
 });
 
-function sellBtn() {                    /**FUNKTIO MYYNTIILMOITUKSEN TEOLLE JA TÄLLE TAPAHTUMAKUUNTELIJA */
-    let myyBtn = document.getElementById("sell");
-    let sellElement = document.createElement("button");
-    sellElement.id = "myydaBtn";
-    sellElement.innerText = "Uusi ilmoitus";
-    myyBtn.appendChild(sellElement);
-    sellElement.addEventListener("click", function() {
-        menuItems.style.display = "none";
-        document.getElementById("productName").value = "";
-        document.getElementById("productDetail").value = "";
-        document.getElementById("productDescription").value = "";
-        document.getElementById("productPrice").value = "";
-        document.getElementById("productPicture").value = "";
-        previewPictures.innerHTML = '';
-        document.getElementById("inValidDetails").innerText = "";
-        document.getElementById("productModal").style.display = "flex";
-    });
-};
-
-window.onload = function() {     /**TARKASTAA ONKO KÄYTTÄJÄ KIRJAUTUNUT */
+/**TARKASTAA ONKO KÄYTTÄJÄ KIRJAUTUNUT */
+window.onload = function() {     
     let loggedInUser = localStorage.getItem("loggedInUser");
-    if (loggedInUser) {         /**KÄYTTÄJÄ KIRJAUTUNUT NIIN SIITÄ ON ILMOITUS NAVISSA */
+
+    /**KÄYTTÄJÄ KIRJAUTUNUT NIIN SIITÄ ON ILMOITUS NAVISSA */
+    if (loggedInUser) {         
         document.getElementById("logBtn").innerText = "Kirjaudu ulos";
         document.getElementById("loggedUser").innerText = "Tervetuloa " + loggedInUser + "!";
     }
@@ -151,92 +40,8 @@ function myydaTuote() {
     window.open("myyjanSivu.html");
 }
 
-document.getElementById("productCloseModal").addEventListener("click", function() {
-    document.getElementById("productModal").style.display = "none";
-});
-
-document.getElementById("productPrice").addEventListener("keypress", function(event) {
-    if (!/[0-9]/.test(event.key)) {
-        event.preventDefault();
-    }
-});
-
-document.getElementById("productPicture").addEventListener("change", function(event) {
-    let files = event.target.files;                       /**TAPAHTUMAKUUNTELIJA KUN KÄYTTÄJÄ LISÄÄ KUVAN MYYTÄVÄLLE TUOTTEELLE */
-    if (files.length > 3) {
-        alert("Voit lisätä maksimissaan kolme kuvaa!");
-        event.target.value = "";
-        return;
-    }
-    let previewContainer = document.getElementById("previewPictures");
-    previewContainer.innerHTML = "";
-
-    
-
-    Array.from(files).forEach(file => {
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            let imgPreview = document.createElement("img");
-            imgPreview.src = e.target.result;
-            previewContainer.appendChild(imgPreview);
-        };
-        reader.readAsDataURL(file);
-    });
-});
-
-document.getElementById("publishBtn").addEventListener("click", function(event) {
-    event.preventDefault();                 /**KUN KÄYTTÄJÄ JULKAISEE MYYNTITILMOITUKSENSA */
-    let syötettyTuote = document.getElementById("productName").value.trim();
-    let syötettyLyhytKuvaus = document.getElementById("productDetail").value.trim();
-    let syötettyTuoteKuvaus = document.getElementById("productDescription").value.trim();
-    let syötettyHinta = document.getElementById("productPrice").value.trim();
-    let syötetytKuvat = document.getElementById("productPicture").files;
-    let publisher = localStorage.getItem("loggedInUser");
-
-    if (!syötettyTuote || !syötettyLyhytKuvaus || !syötettyTuoteKuvaus || !syötettyHinta || !syötetytKuvat.length === 0) {
-        document.getElementById("inValidDetails").innerText = "Kaikki kentät, mukaan lukien kuvatiedosto, on täytettävä.";
-        return;
-    }
-
-    let kuvaUrls = [];
-    let readers = Array.from(syötetytKuvat).map (file => {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        return new Promise(resolve => {
-            reader.onload = () => resolve(reader.result);
-        });
-    });
-    Promise.all(readers).then(results => {
-        kuvaUrls.push(...results);
-        console.log(kuvaUrls);
-        let NewProduct = {
-            tuoteIndex: Date.now(),
-            tuoteNimi: syötettyTuote,
-            kuvaUrls,
-            tuoteKuvausLyhyt: syötettyLyhytKuvaus,
-            tuoteKuvausPitka: syötettyTuoteKuvaus,
-            tuoteHinta: Number(syötettyHinta),
-            onkoOstoskorissa: false,
-            tuotteenJulkaisija: publisher
-        };
-        let products = JSON.parse(localStorage.getItem("products")) || [];
-        products.push(NewProduct);
-        localStorage.setItem("products", JSON.stringify(products));
-
-        document.getElementById("inValidDetails").textContent = "";
-        document.getElementById("productModal").style.display = "none";
-        document.getElementById("confirmationModal").style.display = "block";
-
-        showProducts();
-    });
-});
-
-document.getElementById("confirmOkBtn").addEventListener("click", function() {
-    document.getElementById("confirmationModal").style.display = "none";
-    document.getElementById("detailsModal").reset(); 
-});
-
-function getJsonProducts() {            /**HAKEE VALMIIKSI LISÄTYT TIEDOT JSON TIEDOSTOSTA JA TALLENTAA NE LOCALSTORAGEEN */
+/**HAKEE VALMIIKSI LISÄTYT TIEDOT JSON TIEDOSTOSTA JA TALLENTAA NE LOCALSTORAGEEN */
+function getJsonProducts() {            
 let storedProducts = localStorage.getItem("products");
 if (storedProducts) {
     showProducts();
@@ -257,7 +62,8 @@ if (storedProducts) {
         .catch(error => console.error("Virhe JSON-tiedoston latauksessa:", error));
 };
 
-function showProducts() {               /**NÄYTTÄÄ KAIKKI TUOTTEET LOCALSTORAGESTA */
+/**NÄYTTÄÄ KAIKKI TUOTTEET LOCALSTORAGESTA */
+function showProducts() {               
     let products = JSON.parse(localStorage.getItem("products")) || [];
     let productList = document.getElementById("kauppaContainer");
 
@@ -282,91 +88,14 @@ function showProducts() {               /**NÄYTTÄÄ KAIKKI TUOTTEET LOCALSTORA
     });
 }
 
-function publishedBtn() {               /**LUO OMAT ILMOITUKSET NAPIN JA AVAA PANEELIN JOSSA NÄHTÄVISSÄ OMAT JULKAISUT*/
-    let julkaisutBtn = document.getElementById("publishedItems");
-    let publishedElement = document.createElement("button");
-    publishedElement.id = "publishedBtn";
-    publishedElement.innerText = "Omat ilmoitukset";
-    julkaisutBtn.appendChild(publishedElement);
-
-    publishedElement.addEventListener("click", function() {
-        menuItems.style.display = "none";
-        showPublishedItems();
-        document.getElementById("publishedPanel").classList.add("open");
-    });
-};
-document.addEventListener("DOMContentLoaded", function() {
-    showPublishedItems();
-});
-function showPublishedItems() {         /**NÄYTTÄÄ PANEELISSA KAIKKI OMAT JUKAISUT */
-    let publisher = localStorage.getItem("loggedInUser");
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    let formPanel = document.querySelector("#publishedForm");
-
-    formPanel.innerHTML = "";
-
-    let userProducts = products.filter(product => product.tuotteenJulkaisija === publisher);
-
-    if (userProducts.length === 0) {
-        formPanel.innerHTML = "<p>Ei julkaistuja ilmoituksia.</p>";
-        return;
-    }
-    userProducts.forEach((product) => {
-        let productElement = document.createElement("div");
-        productElement.classList.add("published-item");
-        productElement.innerHTML = `
-            <p><strong>${product.tuoteNimi}</strong></p>
-            <p>Hinta: ${product.tuoteHinta} €</p>
-            <button class="deleteItemBtn" data-index="${product.tuoteIndex}">🗑️</button>
-        `;
-        formPanel.appendChild(productElement);
-    });
-    document.querySelectorAll(".deleteItemBtn").forEach(button => {     /**TUOTTEEN POISTO PAINIKE JA TÄLLE TAPAHTUMAKUUNTELIJA */
-        button.addEventListener("click", function(event) {
-            event.preventDefault();
-            let indexToDelete = this.getAttribute("data-index");
-            deleteAd(indexToDelete);
-        });
-    });
-};
-
-function deleteAd(indexToDelete) {
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    let productToDelete = products.find(product => product.tuoteIndex == indexToDelete);
-    let confirmDeleteMod = document.getElementById("confirmDeleteModal");
-    confirmDeleteMod.style.display = "block";
-    let modalOverlay = document.getElementById("modalOverlay");
-    modalOverlay.style.display = "block";
-    let deleteText = confirmDeleteMod.querySelector(".confirmDeleteText");
-    deleteText.textContent = `Haluatko varmasti poistaa ilmoituksen "${productToDelete.tuoteNimi}"?`;
-    let deleteBtn = confirmDeleteMod.querySelector(".yesDelete");
-    let cancelDeleteBtn = confirmDeleteMod.querySelector(".noDelete");
-
-    deleteBtn.onclick = function() {
-        products = products.filter(product => product.tuoteIndex != indexToDelete);
-        localStorage.setItem("products", JSON.stringify(products));
-        showProducts();
-        showPublishedItems();
-        confirmDeleteMod.style.display = "none";
-        modalOverlay.style.display = "none";
-    };
-    cancelDeleteBtn.onclick = function() {
-        confirmDeleteMod.style.display = "none";
-        modalOverlay.style.display = "none";
-    };
-    
-};
-
-document.getElementById("closeBtnPublish").addEventListener("click", function() {
-    document.getElementById("publishedPanel").classList.remove("open");
-});
-
+/**AVAA OSTOSKORINÄKYMÄN */
 function openChart() {
     menuItems.style.display = "none";
     let shoppingPanel = document.getElementById("shoppingChartPanel");
         shoppingPanel.style.right = "0px";
 };
 
+/**SULKEE OSTOSKORINÄKYMÄN */
 function closeShoppingPanel() {
     let shoppingPanel = document.getElementById("shoppingChartPanel");
     shoppingPanel.style.right = "-295px";

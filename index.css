@@ -21,6 +21,7 @@ a{
     margin: 10px;
     text-align: center;
     width: 200px;
+    height: 380px;
     display: inline-block;
     justify-content: center;
     cursor: pointer;
@@ -36,8 +37,8 @@ a{
     text-align: left;
 }
 #tuoteKuva{
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 200px;
+    max-height: 120px;
 }
 body {
     font-family: Arial, sans-serif;
@@ -322,7 +323,6 @@ button {
     gap: 5px !important;
     overflow: hidden;
     height: auto;
-    /*width: 100%;*/
 }
 
 #previewPictures img {

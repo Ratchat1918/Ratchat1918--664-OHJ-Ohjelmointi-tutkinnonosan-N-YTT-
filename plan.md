@@ -2,7 +2,7 @@
 
 Tämä on Ohjelmoinnin tutkinnonosan näyttösuunnitelma. 
 
-Tarkoituksena näytössä on luoda ryhmätyönä kirpputori ja tavaranvaihtopalvelu sovellus. Sovelluksen ideana on, että käyttäjä rekisteröityy sivulle jonka jälkeen kirjautuneena voi ostaa ja myydä tavaroita. Kirjautumatta käyttäjä voi selata myynti-ilmoituksia joissa on tavaran kuvaus, hinta ja kuva tuotteesta.  
+Tarkoituksena näytössä on luoda ryhmätyönä kirpputori sovellus. Sovelluksen ideana on, että käyttäjä rekisteröityy sivulle jonka jälkeen kirjautuneena voi ostaa ja myydä tavaroita. Kirjautumatta käyttäjä voi selata myynti-ilmoituksia joissa on tavaran kuvaus, hinta ja kuva tuotteesta.  
 
 Sivussa tarkoitus olla seuraavat ominaisuudet:
 
