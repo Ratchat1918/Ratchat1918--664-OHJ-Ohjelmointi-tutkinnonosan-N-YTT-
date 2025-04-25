@@ -6,7 +6,7 @@ function sellBtn() {
     sellElement.innerText = "Uusi ilmoitus";
     myyBtn.appendChild(sellElement);
     sellElement.addEventListener("click", function() {
-        menuItems.style.display = "none";
+        menuItems.classList.remove("open");
         document.getElementById("productName").value = "";
         document.getElementById("productDetail").value = "";
         document.getElementById("productDescription").value = "";
@@ -113,9 +113,24 @@ function publishedBtn() {
     julkaisutBtn.appendChild(publishedElement);
 
     publishedElement.addEventListener("click", function() {
-        menuItems.style.display = "none";
-        showPublishedItems();
-        document.getElementById("publishedPanel").classList.add("open");
+        let menuItems = document.getElementById("menuItems");
+        if (menuItems.classList.contains("open")) {
+            menuItems.classList.remove("open");
+
+            menuItems.removeEventListener("transitionend", onTransitionEnd);
+            menuItems.addEventListener("transitionend", onTransitionEnd);
+
+            function onTransitionEnd(event) {
+                if (event.propertyName === "max-height") {
+                    menuItems.removeEventListener("transitionend", onTransitionEnd);
+                    showPublishedItems();
+                    document.getElementById("publishedPanel").classList.add("open");
+                }
+            }
+        } else {
+            showPublishedItems();
+            document.getElementById("publishedPanel").classList.add("open");
+        }   
     });
 };
 

@@ -1,17 +1,17 @@
 const menuItems = document.getElementById("menuItems");
 
+document.addEventListener("DOMContentLoaded", function() {
+    let menuItems = document.getElementById("menuItems");
+    menuItems.classList.remove("open");
+});
+
 /**TOGGLER VALIKOLLE TAPAHTUMAKUUNTELIJA */
 document.getElementById("menuToggler").addEventListener("click", function() {
     let menuItems = document.getElementById("menuItems");
-    if (menuItems.style.display === "flex" || menuItems.style.top === "100%") {
-        menuItems.style.display = "none";
-        menuItems.style.top = "-200px";
-    } else {
-        menuItems.style.display = "flex";
-        menuItems.style.top = "100%";
-    }
+    menuItems.classList.toggle("open");
 });
 
+/**AUKAISEE OSTOSKORIPANEELIN */
 document.addEventListener("DOMContentLoaded", () => {
     let container = document.querySelector(".container");
     container.style.display = "none";
@@ -90,9 +90,23 @@ function showProducts() {
 
 /**AVAA OSTOSKORINÄKYMÄN */
 function openChart() {
-    menuItems.style.display = "none";
+    let menuItems = document.getElementById("menuItems");
     let shoppingPanel = document.getElementById("shoppingChartPanel");
+
+    if (menuItems.classList.contains("open")) {
+        menuItems.classList.remove("open");
+        menuItems.removeEventListener("transitionend", onTransitionEnd);
+        menuItems.addEventListener("transitionend", onTransitionEnd);
+
+        function onTransitionEnd(event) {
+            if (event.propertyName === "max-height") {
+                menuItems.removeEventListener("transitionend", onTransitionEnd);
+                shoppingPanel.style.right = "0px";
+            }
+        }
+    } else {
         shoppingPanel.style.right = "0px";
+    }
 };
 
 /**SULKEE OSTOSKORINÄKYMÄN */

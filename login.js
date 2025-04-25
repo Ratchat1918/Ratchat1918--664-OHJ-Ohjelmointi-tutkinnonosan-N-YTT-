@@ -9,8 +9,25 @@ document.getElementById("logBtn").addEventListener("click", function() {
         this.innerText = "Kirjaudu";
         location.reload();
     } else {
-        document.getElementById("loginPanel").classList.add("open");
-        menuItems.style.display = "none";
+        let menuItems = document.getElementById("menuItems");
+        if (menuItems.classList.contains("open")) {
+            menuItems.classList.remove("open");
+
+            menuItems.removeEventListener("transitionend", onTransitionEnd);
+
+            menuItems.addEventListener("transitionend", onTransitionEnd);
+
+            function onTransitionEnd(event) {
+                if (event.propertyName == "max-height") {
+                    menuItems.removeEventListener("transitionend", onTransitionEnd);
+                    document.getElementById("loginPanel").classList.add("open");
+                }
+            }
+        } else {
+            document.getElementById("loginPanel").classList.add("open");
+        }
+        
+        
     } 
 });
 
