@@ -1,7 +1,10 @@
 #navbarContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
     background-color: rgb(255, 0, 0);
     max-width: 100%;
-    max-height: 10%;
     padding: 10px;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
@@ -32,6 +35,16 @@ nav {
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
+}
+
+#menuToggler {
+    display: block;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
 }
 
 nav button {
@@ -199,7 +212,7 @@ img.displaySlide{
 }
 .centered {
     position: absolute;
-    top: 5%;
+    top: 25%;
     right: 25px;
     color: white;
 }
@@ -210,6 +223,10 @@ img.displaySlide{
     border-radius: 5px;
 }
 #ostosKoriImg:hover{
+    background-color: rgba(255, 47, 47, 0.938);
+}
+
+
     background-color: rgba(255, 47, 47, 0.938);
 }
 
