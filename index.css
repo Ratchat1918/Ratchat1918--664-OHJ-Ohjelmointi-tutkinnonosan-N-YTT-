@@ -253,7 +253,7 @@ nav button {
     align-items: center;
 }
 
-.modal-content {
+.modal-content, .checkOutModalContent {
     position: relative;
     background-color: rgb(255, 47, 47);
     padding: 20px;
@@ -321,7 +321,7 @@ button {
 }
 
 #productName, #productDetail, #productDescription, #productPrice, #productPicture {
-    margin: 10px 0;
+    margin: 7px 0;
 }
 
 #productDescription {

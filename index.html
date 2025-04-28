@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="index.css" rel="stylesheet">
+    <link href="checkOut.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="kuvat/duck.png">
     <title>Kauppa</title>
 </head>
@@ -102,6 +103,54 @@
                 </div>
                 <p id="inValidDetails" style="color: blue;"></p>
                 <button type="submit" id="publishBtn">Julkaise</button>
+            </form>
+        </div>
+    </div>
+    <div id="checkOutModal" class="productModal">
+        <div class="checkOutModalContent">
+            <span id="checkOutCloseBtn" class="productClose">&times;</span>
+            <h2>Viimeistele tilaus</h2>
+            <form id="detailsModal">
+                <div>
+                    <label for="name">Nimi:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div>
+                    <label for="address">Osoite:</label>
+                    <input type="text" id="address" name="address">
+                </div>
+                <div>
+                    <label for="postcode">Postinumero:</label>
+                    <input type="number" id="postcode" name="postcode">
+                </div>
+                <div>
+                    <label for="email">Sähköposti:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div>
+                    <label for="phonenumber">Puhelinnumero:</label>
+                    <input type="tel" id="phonenumber" name="phonenumber" placeholder="+358123456789">
+                </div>
+                <div class="paymentOption">
+                    <label>
+                        <input type="radio" name="payment" value="visa" id="visacard">
+                        <img src="./kuvat/visa.png" alt="visa logo" class="payment-image">
+                        <input type="radio" name="payment" value="mastercard" id="mastercard">
+                        <img src="./kuvat/mastercard.png" alt="mastercard logo" class="payment-image">
+                    </label>
+                </div>
+                <div>
+                    <label for="cardHolder">Kortin haltija:</label>
+                    <input type="text" id="cardHolder" name="cardholder">
+                    <label for="cardNumber">Kortin nro.</label>
+                    <input type="number" id="cardNumber" name="cardNumber">
+                    <label for="expDate">Kortin voimassaoloaika:</label>
+                    <input type="text" id="expDate" name="expDate" placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}">
+                    <label for="securityCode">CVV/CVC:</label>
+                    <input type="password" id="securityCode" name="securityCode" maxlength="3" required>
+                </div>
+                <p id="inValidCheckOut" style="color: blue;"></p>
+                <button id="confirmOrder">Vahvista tilaus</button>
             </form>
         </div>
     </div>

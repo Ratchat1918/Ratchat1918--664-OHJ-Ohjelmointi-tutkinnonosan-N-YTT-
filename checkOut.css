@@ -1,0 +1,16 @@
+.paymentOption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin: 7px;
+}
+
+.payment-image {
+    width: 50px;
+    height: auto;
+}
+
+#name, #address, #postcode, #email, #phonenumber, #cardHolder, #cardNumber, #expDate, #securityCode {
+    margin: 7px 0;
+}
