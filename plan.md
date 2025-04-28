@@ -43,15 +43,16 @@ Viestimme toisillemma aktiivisesti Discord kanavan kautta jolloin molemmat tiet�
 Seuraamme ajankäyttöä projektissamme OSSI palvelussa sekä kirjaamalla tähän jokaisen päivän työtunnit. 
 
 Egor: 
-15/04/225 4.5 tuntia
-17/04/2025 5.5 tuntia
-22/04/2025 5 tuntia
+-15/04/225 4h 30min
+-17/04/2025 5h 30min
+-22/04/2025 5h
+-28/04/2025 5h 30min
 
 Henry: 
-15/04/25 5 tuntia
-16/04/25 2h 15 min
-17/4/25  6h 30min
-22/4/24 4h 45min
-23/4/25 4h 30min
-24/4/25 5h 30min
+-15/04/25 5 tuntia
+-16/04/25 2h 15 min
+-17/4/25  6h 30min
+-22/4/24 4h 45min
+-23/4/25 4h 30min
+-24/4/25 5h 30min
 
