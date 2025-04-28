@@ -60,7 +60,7 @@ if (storedProducts) {
             let existingProducts = JSON.parse(localStorage.getItem("products")) || [];
             let products = [...existingProducts, ...data.map(product => ({
                 ...product,
-                tuoteIndex:product.tuoteIndex || Date.now() + Math.random()   
+                tuoteIndex:product.tuoteIndex || 0  
             }))];
             localStorage.setItem("products", JSON.stringify(products));
             showProducts();
@@ -74,14 +74,11 @@ function showProducts() {
     let productList = document.getElementById("kauppaContainer");
 
     kauppaContainer.innerHTML = "";
-    
-
-    let x = 0;
 
     products.forEach((element) => {
         productElement = document.createElement("div");
         productElement.innerHTML = `
-            <div onclick="valitaTuote(${x})" class="card">
+            <div onclick="valitaTuote(${element.tuoteIndex})" class="card">
                 <img id="tuoteKuva" src="${element.kuvaUrls[0]}"/>
                 <h2>${element.tuoteNimi}</h2>
                 <p>${element.tuoteKuvausLyhyt}</p>
@@ -90,7 +87,6 @@ function showProducts() {
             </div>
         `;
         productList.appendChild(productElement);
-        x++;
     });
 }
 
@@ -101,15 +97,16 @@ function openChart() {
 
     let products = JSON.parse(localStorage.getItem("products")) || [];
     let ostosKoriSumma=0;
+    let ostoskoriStr=``;
     products.forEach((element)=>{
         if(tuodetOstoskorissa.includes(element.tuoteIndex)){
             ostosKoriSumma+=element.tuoteHinta;
-            shoppingPanel.innerHTML+=`<div class="cartCard">
+            ostoskoriStr+=`<div class="cartCard">
             <p>${element.tuoteNimi}</p>
             <img id='ostoskoriTuoteImg' src='${element.kuvaUrls[0]}'></img>
             <p>${element.tuoteKuvausLyhyt}</p>
             <p>${element.tuoteHinta} €</p>
-            <img style="width: 25px;" src="kuvat/trash-can-svgrepo-com.svg">
+            <img oclick='poistaKorista()' id='poistaImg' src="kuvat/trash-can-svgrepo-com.svg">
             </div>`;
         }
     });shoppingPanel.innerHTML+=`<h2>${tuodetOstoskorissa.length} tuotetta, yhteensä ${ostosKoriSumma} €</h2>`;
@@ -130,10 +127,14 @@ function openChart() {
     }
 };
 
+function poistaKorista(){
+
+}
+
 /**SULKEE OSTOSKORINÄKYMÄN */
 function closeShoppingPanel() {
     let shoppingPanel = document.getElementById("shoppingChartPanel");
-    shoppingPanel.style.right = "-295px";
+    shoppingPanel.style.right = "-495px";
 };
 
 function openMainPage(){

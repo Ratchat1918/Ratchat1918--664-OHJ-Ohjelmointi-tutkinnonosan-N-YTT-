@@ -1,4 +1,3 @@
-
 let tuoteIndexSession = Number(sessionStorage.getItem("tuoteIndex"));
 let imgNum = 1;
 let slideIndex = 0;
@@ -47,8 +46,12 @@ function createSlides() {
             });
             if(tuoteIndexSession>dataLength-1){
                 let products = JSON.parse(localStorage.getItem("products")) || [];
-                slidesContainer.innerHTML += `<img class="slide" src="${products[tuoteIndexSession].kuvaUrls}" alt="Image #${1}">`;
-                initializeSlider();
+                products.forEach(element => {
+                    if(element.tuoteIndex===tuoteIndexSession){
+                        slidesContainer.innerHTML += `<img class="slide" src="${element.kuvaUrls}">`;
+                    }
+                    initializeSlider();
+                });
             }
         });
 }
@@ -67,10 +70,15 @@ function createInfo(){
         });
         if(tuoteIndexSession>dataLength-1){
             let products = JSON.parse(localStorage.getItem("products")) || [];
-            document.getElementById("titleIlmoitus").textContent=products[tuoteIndexSession].tuoteNimi;
-                document.getElementById("nimiH1").textContent=products[tuoteIndexSession].tuoteNimi;
-                document.getElementById("tuoteHintaH1").textContent=`${products[tuoteIndexSession].tuoteHinta} €`;
-                document.getElementById("tuoteInfoP").textContent=products[tuoteIndexSession].tuoteKuvausPitka;
+            console.log(products)
+            products.forEach(element => {
+                if(element.tuoteIndex===tuoteIndexSession){
+                    document.getElementById("titleIlmoitus").textContent=element.tuoteNimi;
+                    document.getElementById("nimiH1").textContent=element.tuoteNimi;
+                    document.getElementById("tuoteHintaH1").textContent=`${element.tuoteHinta} €`;
+                    document.getElementById("tuoteInfoP").textContent=element.tuoteKuvausPitka;
+                }
+            });
         }
     });
 }
