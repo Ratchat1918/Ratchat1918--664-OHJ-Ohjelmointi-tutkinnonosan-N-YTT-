@@ -25,9 +25,7 @@ document.getElementById("logBtn").addEventListener("click", function() {
             }
         } else {
             document.getElementById("loginPanel").classList.add("open");
-        }
-        
-        
+        } 
     } 
 });
 

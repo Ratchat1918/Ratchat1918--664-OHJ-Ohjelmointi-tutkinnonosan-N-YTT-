@@ -6,7 +6,6 @@ function sellBtn() {
     sellElement.innerText = "Uusi ilmoitus";
     myyBtn.appendChild(sellElement);
     sellElement.addEventListener("click", function() {
-        menuItems.classList.remove("open");
         document.getElementById("productName").value = "";
         document.getElementById("productDetail").value = "";
         document.getElementById("productDescription").value = "";
@@ -14,7 +13,23 @@ function sellBtn() {
         document.getElementById("productPicture").value = "";
         previewPictures.innerHTML = '';
         document.getElementById("inValidDetails").innerText = "";
-        document.getElementById("productModal").style.display = "flex";
+        let menuItems = document.getElementById("menuItems");
+        if (menuItems.classList.contains("open")) {
+            menuItems.classList.remove("open");
+
+            menuItems.removeEventListener("transitionend", onTransitionEnd);
+
+            menuItems.addEventListener("transitionend", onTransitionEnd);
+
+            function onTransitionEnd(event) {
+                if (event.propertyName == "max-height") {
+                    menuItems.removeEventListener("transitionend", onTransitionEnd);
+                    document.getElementById("productModal").style.display = "flex";
+                }
+            }
+        } else {
+            document.getElementById("productModal").style.display = "flex";
+        }
     });
 };
 
