@@ -25,6 +25,14 @@ a{
     justify-content: center;
     cursor: pointer;
 }
+.cartCard{
+    border: 1px solid rgb(80, 80, 80);
+    border-radius: 10px;
+    text-align: center;
+    max-width: 40%;
+    display: inline-block;
+    justify-content: center;
+}
 #kauppaContainer{
     text-align: center;
     display: flex;
@@ -134,7 +142,7 @@ nav button {
     position: fixed;
     top: 0;
     right: -295px;
-    width: 250px;
+    width: 200px;
     height: 100%;
     background-color: rgb(255, 47, 47);
     border-radius: 10px;
@@ -370,8 +378,8 @@ button {
 }
 .centered {
     position: absolute;
-    top: 5%;
-    right: 25px;
+    top: 25%;
+    right: 20px;
     color: white;
 }
 #ostosKoriImg{
@@ -383,6 +391,13 @@ button {
 #ostosKoriImg:hover{
     background-color: rgba(255, 47, 47, 0.938);
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#ostoskoriTuoteImg{
+    max-width: 60%;
+    border-radius: 5px;
+}
     justify-content: center;
     align-items: center;
 }
