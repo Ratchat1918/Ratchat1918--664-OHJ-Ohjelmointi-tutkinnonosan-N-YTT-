@@ -109,8 +109,8 @@ function openChart() {
             <img oclick='poistaKorista()' id='poistaImg' src="kuvat/trash-can-svgrepo-com.svg">
             </div>`;
         }
-    });shoppingPanel.innerHTML+=`<h2>${tuodetOstoskorissa.length} tuotetta, yhteensä ${ostosKoriSumma} €</h2>`;
-    shoppingPanel.innerHTML += `<button onclick="checkOut()" id="checkOutBtn">Siirry kassalle =></button>`
+    });shoppingPanel.innerHTML+=`<h2>${tuodetOstoskorissa.length} tuotetta, yhteensä ${ostosKoriSumma} €</h2>
+    <button onclick="checkOut()" id="checkOutBtn">Siirry kassalle =></button>`;
     if (menuItems.classList.contains("open")) {
         menuItems.classList.remove("open");
         menuItems.removeEventListener("transitionend", onTransitionEnd);
