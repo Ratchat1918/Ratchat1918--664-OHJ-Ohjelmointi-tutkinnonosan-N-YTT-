@@ -9,17 +9,22 @@
 </head>
 <body>
     <div id="navbarContainer">
-        <a id="tunnus" href="index.html"><img src="kuvat/duck.png"></a>
-        <nav>
+        <a id="tunnus" href="#" onclick="openMainPage()"><img src="kuvat/duck.png"></a>
+        <div id="rightElements">
             <p id="loggedUser"></p>
-            <div id="sell"></div>
-            <div id="publishedItems"></div>
-            <button id="logBtn">Kirjaudu</button>
+            <nav>
+                <button id="menuToggler">☰</button>
+                <div id="menuItems">
+                    <div id="sell"></div>
+                    <div id="publishedItems"></div>
+                    <button id="logBtn">Kirjaudu</button>
+                </div>
+            </nav>
             <div class="container">
-                <img onclick="console.log('jkdfhg')" src="kuvat/shoppingCart.png" id="ostosKoriImg">
-                <div class="centered">0</div>
+                <img onclick="openChart()" src="kuvat/shoppingCart.png" id="ostosKoriImg">
+                <div id="tuoteMaara" class="centered">0</div>
             </div>
-        </nav>
+        </div>
     </div>
     <div id="publishedPanel" class="panel">
         <span id="closeBtnPublish">&times;</span>
@@ -43,5 +48,6 @@
         </button>
     </div>
 <script src="ilmoitus.js"></script>
+<script src="login.js"></script>
 </html> 
 
