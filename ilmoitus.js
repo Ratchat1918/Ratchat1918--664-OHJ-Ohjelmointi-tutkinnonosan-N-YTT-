@@ -5,9 +5,30 @@ let slideIndex = 0;
 let intervalId;
 let dataLength;
 let amountOfThingsInCart=0;
-valitsettuTuoteLista=[1];
-sessionStorage.setItem("items",JSON.stringify(valitsettuTuoteLista));
-sessionStorage.setItem('amountOfThingsInCart',amountOfThingsInCart);
+
+/**TOGGLER VALIKOLLE TAPAHTUMAKUUNTELIJA */
+document.getElementById("menuToggler").addEventListener("click", function() {
+    let menuItems = document.getElementById("menuItems");
+    menuItems.classList.toggle("open");
+});
+
+/**AUKAISEE OSTOSKORIPANEELIN */
+document.addEventListener("DOMContentLoaded", () => {
+    let container = document.querySelector(".container");
+    container.style.display = "none";
+});
+
+/**TARKASTAA ONKO KÄYTTÄJÄ KIRJAUTUNUT */
+window.onload = function() {     
+    let loggedInUser = localStorage.getItem("loggedInUser");
+
+    /**KÄYTTÄJÄ KIRJAUTUNUT NIIN SIITÄ ON ILMOITUS NAVISSA */
+    if (loggedInUser) {         
+        document.getElementById("logBtn").innerText = "Kirjaudu ulos";
+        document.getElementById("loggedUser").innerText = "Tervetuloa " + loggedInUser + "!";
+    }
+};
+
 function createSlides() {
     const slidesContainer = document.getElementsByClassName("slides")[0];
     slidesContainer.innerHTML = "";
@@ -54,12 +75,14 @@ function createInfo(){
     });
 }
 function addToCart(){
-    amountOfThingsInCart++;
-    sessionStorage.setItem('amountOfThingsInCart',amountOfThingsInCart);
-    document.getElementById("OstosKoriTouteMaaraDiv").textContent=sessionStorage.getItem("amountOfThingsInCart");
-    sessionStorage.setItem(`valitsettu${tuoteIndexSession}`,tuoteIndexSession);
-    let itemLista=sessionStorage.getItem("items");
-    console.log(itemLista);
+    let valitsettuTuoteLista=JSON.parse(localStorage.getItem("itemIndexCart"));
+    if(valitsettuTuoteLista.includes(tuoteIndexSession)===false){
+        amountOfThingsInCart++;
+        valitsettuTuoteLista.push(tuoteIndexSession);
+    }else{
+        window.alert("Tuote on jo ostoskorissa");
+    }
+    localStorage.setItem("itemIndexCart",JSON.stringify(valitsettuTuoteLista));
 }
 
 function initializeSlider() {
@@ -99,3 +122,33 @@ document.addEventListener("DOMContentLoaded", createInfo);
 document.addEventListener("DOMContentLoaded", createSlides);
 document.addEventListener("DOMContentLoaded", createInfo);
 
+/**AVAA OSTOSKORINÄKYMÄN */
+function openChart() {
+    let menuItems = document.getElementById("menuItems");
+    let shoppingPanel = document.getElementById("shoppingChartPanel");
+
+    if (menuItems.classList.contains("open")) {
+        menuItems.classList.remove("open");
+        menuItems.removeEventListener("transitionend", onTransitionEnd);
+        menuItems.addEventListener("transitionend", onTransitionEnd);
+
+        function onTransitionEnd(event) {
+            if (event.propertyName === "max-height") {
+                menuItems.removeEventListener("transitionend", onTransitionEnd);
+                shoppingPanel.style.right = "0px";
+            }
+        }
+    } else {
+        shoppingPanel.style.right = "0px";
+    }
+};
+
+function openMainPage(){
+    window.open('index.html');
+}
+
+/**SULKEE OSTOSKORINÄKYMÄN */
+function closeShoppingPanel() {
+    let shoppingPanel = document.getElementById("shoppingChartPanel");
+    shoppingPanel.style.right = "-295px";
+};
