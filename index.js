@@ -1,7 +1,9 @@
 if(sessionStorage.getItem("itemIndexCart")===null){
     sessionStorage.setItem("itemIndexCart",JSON.stringify([]));/**LOUDA OSTOSKORIN LISTA */
 }
-
+tuodenMaara=JSON.parse(sessionStorage.getItem("itemIndexCart"));
+console.log(tuodenMaara)
+document.getElementById('tuoteMaara').innerHTML=tuodenMaara.length;
 const menuItems = document.getElementById("menuItems");
 
 document.addEventListener("DOMContentLoaded", function() {
