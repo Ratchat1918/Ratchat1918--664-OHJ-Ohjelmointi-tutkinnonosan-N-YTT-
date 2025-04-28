@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="navbarContainer">
-        <a id="tunnus" href="#"><img src="kuvat/duck.png"></a>
+        <a id="tunnus" href="#" onclick="openMainPage()"><img src="kuvat/duck.png"></a>
         <div id="rightElements">
             <p id="loggedUser"></p>
             <nav>
@@ -22,7 +22,7 @@
             </nav>
             <div class="container">
                 <img onclick="openChart()" src="kuvat/shoppingCart.png" id="ostosKoriImg">
-                <div class="centered">0</div>
+                <div id="tuoteMaara" class="centered">0</div>
             </div>
         </div>
     </div>
@@ -117,3 +117,4 @@
 <script src="login.js"></script>
 <script src="myyjanSivu.js"></script>
 </html>
+
