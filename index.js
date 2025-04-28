@@ -1,10 +1,10 @@
 if(localStorage.getItem("itemIndexCart")===null){
     localStorage.setItem("itemIndexCart",JSON.stringify([]));/**LOUDA OSTOSKORIN LISTA */
 }
-tuodenMaara=JSON.parse(localStorage.getItem("itemIndexCart"));
-console.log(tuodenMaara)
-document.getElementById('tuoteMaara').innerHTML=tuodenMaara.length;
+tuodetOstoskorissa=JSON.parse(localStorage.getItem("itemIndexCart"));
+document.getElementById('tuoteMaara').innerHTML=tuodetOstoskorissa.length;
 
+const menuItems = document.getElementById("menuItems");
 
 document.addEventListener("DOMContentLoaded", function() {
     let menuItems = document.getElementById("menuItems");
@@ -99,6 +99,20 @@ function openChart() {
     let menuItems = document.getElementById("menuItems");
     let shoppingPanel = document.getElementById("shoppingChartPanel");
 
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let ostosKoriSumma=0;
+    products.forEach((element)=>{
+        if(tuodetOstoskorissa.includes(element.tuoteIndex)){
+            ostosKoriSumma+=element.tuoteHinta;
+            shoppingPanel.innerHTML+=`<div class="cartCard">
+            <p>${element.tuoteNimi}</p>
+            <img id='ostoskoriTuoteImg' src='${element.kuvaUrls[0]}'></img>
+            <p>${element.tuoteKuvausLyhyt}</p>
+            <p>${element.tuoteHinta} €</p>
+            <img style="width: 25px;" src="kuvat/trash-can-svgrepo-com.svg">
+            </div>`;
+        }
+    });shoppingPanel.innerHTML+=`<h2>${tuodetOstoskorissa.length} tuotetta, yhteensä ${ostosKoriSumma} €</h2>`;
     if (menuItems.classList.contains("open")) {
         menuItems.classList.remove("open");
         menuItems.removeEventListener("transitionend", onTransitionEnd);
@@ -120,6 +134,10 @@ function closeShoppingPanel() {
     let shoppingPanel = document.getElementById("shoppingChartPanel");
     shoppingPanel.style.right = "-295px";
 };
+
+function openMainPage(){
+    window.open('index.html');
+}
 
 window.onload = function() {
     getJsonProducts();
