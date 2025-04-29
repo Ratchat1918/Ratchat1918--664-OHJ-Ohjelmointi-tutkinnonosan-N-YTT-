@@ -152,9 +152,8 @@ function openChart() {
 };
 
 function openMainPage(){
-    window.open('index.html');
+    window.location.replace("index.html");
 }
-
 /**SULKEE OSTOSKORINÄKYMÄN */
 function closeShoppingPanel() {
     let shoppingPanel = document.getElementById("shoppingChartPanel");
