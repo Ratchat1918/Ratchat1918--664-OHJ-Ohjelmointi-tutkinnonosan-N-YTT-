@@ -37,7 +37,7 @@ window.onload = function() {
 function valitaTuote(tavaraIndex) {
     //document.getElementById("tuodenSivuTitle").textContent=`sdfsdg`;
     sessionStorage.setItem("tuoteIndex",tavaraIndex);
-    window.open('imoitus.html');
+    window.location.replace('imoitus.html');
 }
 
 const kauppaContainer = document.getElementById("kauppaContainer");
@@ -170,7 +170,7 @@ function closeShoppingPanel() {
 };
 
 function openMainPage(){
-    window.open('index.html');
+    window.location.replace("index.html");
 }
 
 window.onload = function() {
