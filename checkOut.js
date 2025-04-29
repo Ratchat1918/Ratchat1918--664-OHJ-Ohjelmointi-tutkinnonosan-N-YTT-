@@ -20,31 +20,15 @@ document.getElementById("checkOutCloseBtn").addEventListener("click", function()
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    let confirmForm = document.getElementById("checkOutDetailsModal");
-    confirmForm.addEventListener("submit", function(event) {
+    let confirmButton = document.getElementById("confirmOrder");
+    confirmButton.addEventListener("click", function(event) {
             let visaChecked = document.getElementById("visacard").checked;
             let masterChecked = document.getElementById("mastercard").checked;
-            let cardNumber = document.getElementById("cardNumber").value.replace(/\s/g, "");
-            let errors = [];
-            if (cardNumber.length !== 16) {
-                errors.push("Kortin tulee sisältää tasan 16 numeroa.")
-            }
             if (!visaChecked && !masterChecked) {
-                errors.push("Valitse maksutapa: Visa tai Mastercard.");
-            }
-            if (errors.length > 0) {
-                alert(errors.join("\n"));
                 event.preventDefault();
+                alert("Valitse maksutapa: Visa tai Mastercard.");
             }
-            
         });
-});
-
-document.getElementById("cardNumber").addEventListener("input", function(event) {
-    let cardNumberInput = event.target;
-    let cardNumberValue = cardNumberInput.value.replace(/\s/g, "");
-    cardNumberValue = cardNumberValue.match(/.{1,4}/g)?.join(" ") || cardNumberValue;
-    cardNumberInput.value = cardNumberValue;
 });
 
 document.getElementById("securityCode").addEventListener("input", function(event) {
@@ -55,5 +39,11 @@ document.getElementById("securityCode").addEventListener("input", function(event
 });
 
 document.getElementById("confirmOrder").addEventListener("click", function() {
-    console.log("checkOut");
+    ostosKoriSumma=0;
+    let tuodetOstoskorissa=JSON.parse(localStorage.getItem("itemIndexCart"));
+    tuodetOstoskorissa=[];
+    localStorage.setItem("itemIndexCart",JSON.stringify(tuodetOstoskorissa));
+    shoppingPanel.innerHTML=`<span id="closeBtnShopping" onclick="closeShoppingPanel()">&times;</span><h2>Ostoskori</h2>`;
+    shoppingPanel.innerHTML+=`<h2>${tuodetOstoskorissa.length} tuotetta, yhteensä ${ostosKoriSumma} €</h2>
+    <button onclick="checkOut()" id="checkOutBtn">Siirry kassalle =></button>`;
 })
