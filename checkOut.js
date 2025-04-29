@@ -20,15 +20,31 @@ document.getElementById("checkOutCloseBtn").addEventListener("click", function()
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    let confirmButton = document.getElementById("confirmOrder");
-    confirmButton.addEventListener("click", function(event) {
+    let confirmForm = document.getElementById("checkOutDetailsModal");
+    confirmForm.addEventListener("submit", function(event) {
             let visaChecked = document.getElementById("visacard").checked;
             let masterChecked = document.getElementById("mastercard").checked;
-            if (!visaChecked && !masterChecked) {
-                event.preventDefault();
-                alert("Valitse maksutapa: Visa tai Mastercard.");
+            let cardNumber = document.getElementById("cardNumber").value.replace(/\s/g, "");
+            let errors = [];
+            if (cardNumber.length !== 16) {
+                errors.push("Kortin tulee sisältää tasan 16 numeroa.")
             }
+            if (!visaChecked && !masterChecked) {
+                errors.push("Valitse maksutapa: Visa tai Mastercard.");
+            }
+            if (errors.length > 0) {
+                alert(errors.join("\n"));
+                event.preventDefault();
+            }
+            
         });
+});
+
+document.getElementById("cardNumber").addEventListener("input", function(event) {
+    let cardNumberInput = event.target;
+    let cardNumberValue = cardNumberInput.value.replace(/\s/g, "");
+    cardNumberValue = cardNumberValue.match(/.{1,4}/g)?.join(" ") || cardNumberValue;
+    cardNumberInput.value = cardNumberValue;
 });
 
 document.getElementById("securityCode").addEventListener("input", function(event) {
