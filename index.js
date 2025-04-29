@@ -20,7 +20,7 @@ document.getElementById("menuToggler").addEventListener("click", function() {
 /**AUKAISEE OSTOSKORIPANEELIN */
 document.addEventListener("DOMContentLoaded", () => {
     let container = document.querySelector(".container");
-    container.style.display = "none";
+    container.style.display = "block";
 });
 
 /**TARKASTAA ONKO KÄYTTÄJÄ KIRJAUTUNUT */
