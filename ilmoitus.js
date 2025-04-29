@@ -70,6 +70,7 @@ function addToCart(){
         window.alert("Tuote on jo ostoskorissa");
     }
     localStorage.setItem("itemIndexCart",JSON.stringify(valitsettuTuoteLista));
+    location.reload();
 }
 
 function initializeSlider() {
@@ -138,4 +139,5 @@ function closeShoppingPanel() {
     let shoppingPanel = document.getElementById("shoppingChartPanel");
     shoppingPanel.style.right = "-295px";
 };
+
 
