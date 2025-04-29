@@ -4,6 +4,7 @@ let slideIndex = 0;
 let intervalId;
 let dataLength;
 let amountOfThingsInCart=0;
+document.getElementById("tuoteMaara").innerHTML=JSON.parse(localStorage.getItem("itemIndexCart")).length;
 
 function createSlides() {
     const slidesContainer = document.getElementsByClassName("slides")[0];
@@ -60,6 +61,7 @@ function createInfo(){
     });
 }
 function addToCart(){
+    document.getElementById("tuoteMaara").innerHTML=JSON.parse(localStorage.getItem("itemIndexCart")).length;
     let valitsettuTuoteLista=JSON.parse(localStorage.getItem("itemIndexCart"));
     if(valitsettuTuoteLista.includes(tuoteIndexSession)===false){
         amountOfThingsInCart++;
@@ -136,3 +138,4 @@ function closeShoppingPanel() {
     let shoppingPanel = document.getElementById("shoppingChartPanel");
     shoppingPanel.style.right = "-295px";
 };
+
