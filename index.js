@@ -1,7 +1,7 @@
 if(localStorage.getItem("itemIndexCart")===null){
     localStorage.setItem("itemIndexCart",JSON.stringify([]));/**LOUDA OSTOSKORIN LISTA */
 }
-tuodetOstoskorissa=JSON.parse(localStorage.getItem("itemIndexCart"));
+let tuodetOstoskorissa=JSON.parse(localStorage.getItem("itemIndexCart"));
 document.getElementById('tuoteMaara').innerHTML=tuodetOstoskorissa.length;
 
 const menuItems = document.getElementById("menuItems");
@@ -82,7 +82,6 @@ function showProducts() {
                 <img id="tuoteKuva" src="${element.kuvaUrls[0]}"/>
                 <h2>${element.tuoteNimi}</h2>
                 <p>${element.tuoteKuvausLyhyt}</p>
-                <p>${element.tuoteKuvausPitka}</p>
                 <h2>${element.tuoteHinta} €</h2>
             </div>
         `;
@@ -106,7 +105,7 @@ function openChart() {
             <img id='ostoskoriTuoteImg' src='${element.kuvaUrls[0]}'></img>
             <p>${element.tuoteKuvausLyhyt}</p>
             <p>${element.tuoteHinta} €</p>
-            <img oclick='poistaKorista()' id='poistaImg' src="kuvat/trash-can-svgrepo-com.svg">
+            <img onclick='poistaKorista(${element.tuoteIndex})' id='poistaImg' src="kuvat/trash-can-svgrepo-com.svg">
             </div>`;
         }
     });
@@ -129,13 +128,44 @@ function openChart() {
     }
 };
 
-function poistaKorista(){
-
+function poistaKorista(poistaId){
+    let shoppingPanel = document.getElementById("shoppingChartPanel");
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let ostosKoriSumma=0;
+    let ostoskoriStr=``;
+    let valitsettuTuoteNyt=[];
+    shoppingPanel.innerHTML=`<span id="closeBtnShopping" onclick="closeShoppingPanel()">&times;</span><h2>Ostoskori</h2>`;
+    products.forEach((element)=>{//POSITETAAN POISTETTAVAN TUODEN 
+        if(tuodetOstoskorissa.includes(element.tuoteIndex)){
+            if(element.tuoteIndex!=poistaId){
+                valitsettuTuoteNyt.push(element.tuoteIndex);
+            }
+        }
+    });
+    localStorage.setItem("itemIndexCart",JSON.stringify(valitsettuTuoteNyt));
+    ostosKoriSumma=0;
+    tuodetOstoskorissa=JSON.parse(localStorage.getItem("itemIndexCart"));
+    document.getElementById('tuoteMaara').innerHTML=tuodetOstoskorissa.length;
+    products.forEach((element)=>{
+        if(tuodetOstoskorissa.includes(element.tuoteIndex)){
+            ostosKoriSumma+=element.tuoteHinta;
+            ostoskoriStr+=`<div class="cartCard">
+            <p>${element.tuoteNimi}</p>
+            <img id='ostoskoriTuoteImg' src='${element.kuvaUrls[0]}'></img>
+            <p>${element.tuoteKuvausLyhyt}</p>
+            <p>${element.tuoteHinta} €</p>
+            <img onclick='poistaKorista(${element.tuoteIndex})' id='poistaImg' src="kuvat/trash-can-svgrepo-com.svg"></div>`;
+        }
+    });
+    shoppingPanel.innerHTML+=`${ostoskoriStr}`;
+    shoppingPanel.innerHTML+=`<h2>${tuodetOstoskorissa.length} tuotetta, yhteensä ${ostosKoriSumma} €</h2>
+    <button onclick="checkOut()" id="checkOutBtn">Siirry kassalle =></button>`;
 }
 
 /**SULKEE OSTOSKORINÄKYMÄN */
 function closeShoppingPanel() {
     let shoppingPanel = document.getElementById("shoppingChartPanel");
+    shoppingPanel.innerHTML=`<span id="closeBtnShopping" onclick="closeShoppingPanel()">&times;</span><h2>Ostoskori</h2>`;
     shoppingPanel.style.right = "-495px";
 };
 
@@ -149,3 +179,4 @@ window.onload = function() {
 };
 
 //localStorage.clear();
+
