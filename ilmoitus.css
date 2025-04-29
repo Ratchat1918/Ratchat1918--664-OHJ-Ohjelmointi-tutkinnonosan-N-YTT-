@@ -174,14 +174,7 @@ button {
 img.displaySlide{
     display: block;
     animation-name: fade;
-<<<<<<< HEAD
     animation-duration: 1.5s;  
-=======
-    animation-duration: 1.5s;
-<<<<<<< HEAD
-    
->>>>>>> 6b8ece93f52f38312015b4a8b71d36fdfb44d7a3
->>>>>>> 2f473fcc8f34932153309b5348927dfd23fa7086
 }
 .slider button{
     position: absolute;
@@ -234,9 +227,4 @@ img.displaySlide{
 }
 #ostosKoriImg:hover{
     background-color: rgba(255, 47, 47, 0.938);
-<<<<<<< HEAD
 }
-=======
-}
-
->>>>>>> 2f473fcc8f34932153309b5348927dfd23fa7086
