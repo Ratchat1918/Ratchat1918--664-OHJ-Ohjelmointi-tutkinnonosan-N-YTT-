@@ -130,7 +130,10 @@ nav button {
     border: 1px solid rgb(0, 0, 0);
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
     padding: 20px;
+    box-sizing: border-box;
     transition: right 0.5s ease-in-out;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .panel.open {

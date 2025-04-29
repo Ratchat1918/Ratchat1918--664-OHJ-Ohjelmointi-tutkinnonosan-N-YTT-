@@ -172,7 +172,7 @@ function showPublishedItems() {
         productElement.classList.add("published-item");
         productElement.innerHTML = `
             <p><strong>${product.tuoteNimi}</strong></p>
-            <p>Hinta: ${product.tuoteHinta} €</p>
+            <p>${product.tuoteHinta} €</p>
             <button class="deleteItemBtn" data-index="${product.tuoteIndex}">🗑️</button>
         `;
         formPanel.appendChild(productElement);
