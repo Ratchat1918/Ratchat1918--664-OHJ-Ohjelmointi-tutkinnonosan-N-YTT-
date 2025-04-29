@@ -5,29 +5,6 @@ let intervalId;
 let dataLength;
 let amountOfThingsInCart=0;
 
-/**TOGGLER VALIKOLLE TAPAHTUMAKUUNTELIJA */
-document.getElementById("menuToggler").addEventListener("click", function() {
-    let menuItems = document.getElementById("menuItems");
-    menuItems.classList.toggle("open");
-});
-
-/**AUKAISEE OSTOSKORIPANEELIN */
-document.addEventListener("DOMContentLoaded", () => {
-    let container = document.querySelector(".container");
-    container.style.display = "block";
-});
-
-/**TARKASTAA ONKO KÄYTTÄJÄ KIRJAUTUNUT */
-window.onload = function() {     
-    let loggedInUser = localStorage.getItem("loggedInUser");
-
-    /**KÄYTTÄJÄ KIRJAUTUNUT NIIN SIITÄ ON ILMOITUS NAVISSA */
-    if (loggedInUser) {         
-        document.getElementById("logBtn").innerText = "Kirjaudu ulos";
-        document.getElementById("loggedUser").innerText = "Tervetuloa " + loggedInUser + "!";
-    }
-};
-
 function createSlides() {
     const slidesContainer = document.getElementsByClassName("slides")[0];
     slidesContainer.innerHTML = "";

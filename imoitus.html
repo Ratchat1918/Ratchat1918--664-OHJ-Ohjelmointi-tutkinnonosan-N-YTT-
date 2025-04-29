@@ -12,14 +12,7 @@
         <a id="tunnus" href="#" onclick="openMainPage()"><img src="kuvat/duck.png"></a>
         <div id="rightElements">
             <p id="loggedUser"></p>
-            <nav>
-                <button id="menuToggler">☰</button>
-                <div id="menuItems">
-                    <div id="sell"></div>
-                    <div id="publishedItems"></div>
-                    <button id="logBtn">Kirjaudu</button>
-                </div>
-            </nav>
+            
             <div class="container">
                 <img onclick="openChart()" src="kuvat/shoppingCart.png" id="ostosKoriImg">
                 <div id="tuoteMaara" class="centered">0</div>
@@ -44,10 +37,12 @@
         <h1 id="tuoteHintaH1"></h1>
         <button id="cartBtn" onclick="addToCart()">
             <img style="max-width: 100%; max-height: 100%;" src="kuvat/shoppingCart.png" >
-            Add to cart
+            Lisää ostoskoriin
+        </button><br>
+        <button id="takasOstoksille" onclick="openMainPage()">
+            Jatka ostoksia
         </button>
     </div>
 <script src="ilmoitus.js"></script>
 <script src="login.js"></script>
 </html> 
-
