@@ -14,3 +14,13 @@
 #name, #address, #postcode, #email, #phonenumber, #cardHolder, #cardNumber, #expDate, #securityCode {
     margin: 7px 0;
 }
+
+#checkOutDetailsModal {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+#checkOutDetailsModal div {
+    display: flex;
+    flex-direction: column;
+}
