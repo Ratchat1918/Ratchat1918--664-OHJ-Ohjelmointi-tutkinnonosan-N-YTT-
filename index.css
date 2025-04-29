@@ -381,3 +381,6 @@ button {
     justify-content: center;
     align-items: center;
 }
+#poistaImg{
+    max-width: 25%;
+}
