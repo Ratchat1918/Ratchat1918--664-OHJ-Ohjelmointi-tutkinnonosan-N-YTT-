@@ -83,10 +83,11 @@ document.getElementById("publishBtn").addEventListener("click", function(event) 
     }
 
     let kuvaUrls = [];
+    /**MUUNTAA KUVATIEDOSTOJOUKON TAULUKOKSI JA KÄY JOKAISEN TIEDOSTON LÄPI */
     let readers = Array.from(syötetytKuvat).map (file => {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        return new Promise(resolve => {
+        let reader = new FileReader(); /**OLIO JOLLA VOIDAAN LUKEA TIEDOSTON SISÄLTÖ */
+        reader.readAsDataURL(file); /**MUUTETAAN TIEDOSTO BASE64-MUOTOON */
+        return new Promise(resolve => {     /**KÄYTETTÄVÄKSI ESIKATSELUSSA */
             reader.onload = () => resolve(reader.result);
         });
     });
@@ -156,11 +157,14 @@ document.addEventListener("DOMContentLoaded", function() {
 /**NÄYTTÄÄ PANEELISSA KAIKKI OMAT JUKAISUT */
 function showPublishedItems() {         
     let publisher = localStorage.getItem("loggedInUser");
+
+    /**HAKEE TALLENNETUT TUOTTEET JA MUUTETAAN OBJEKTEIKSI */
     let products = JSON.parse(localStorage.getItem("products")) || [];
     let formPanel = document.querySelector("#publishedForm");
 
     formPanel.innerHTML = "";
 
+    /**VALITSEE VAIN KIRJAUTUNEEN KÄYTTÄJÄN TUOTTEET */
     let userProducts = products.filter(product => product.tuotteenJulkaisija === publisher);
 
     if (userProducts.length === 0) {
