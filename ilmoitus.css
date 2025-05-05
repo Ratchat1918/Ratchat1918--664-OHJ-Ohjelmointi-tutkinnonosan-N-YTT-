@@ -165,6 +165,12 @@ button {
     margin: auto;
     overflow: hidden;
 }
+@media screen and (max-width: 768px) {
+   .slider {
+    width: 80%;
+    height: auto;
+   } 
+}
 .slider img{
     width: 99%;
     display: none;
