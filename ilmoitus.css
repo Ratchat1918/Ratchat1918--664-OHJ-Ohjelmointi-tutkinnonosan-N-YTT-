@@ -166,7 +166,7 @@ button {
     overflow: hidden;
 }
 .slider img{
-    width: 100%;
+    width: 99%;
     display: none;
     border-radius: 50px;
     border: solid black 2px;
